@@ -75,6 +75,12 @@ hbox {
 
 hbox {
   hl Kernel Space
+  vbox {
+    hl Libraries
+    vl malloc/free
+    vl atomic\_*
+    vl condvar
+  }
   hbox {
     hl System Call Interface
     vl File I/O

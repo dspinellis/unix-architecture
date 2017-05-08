@@ -26,13 +26,14 @@ import argparse
 import re
 import sys
 
-RE_HORIZONTAL_BOX = re.compile(r'\s*hbox\s*\{')
+RE_HOR_BOX = re.compile(r'\s*hbox\s*\{')
+RE_VER_BOX = re.compile(r'\s*vbox\s*\{')
 RE_BLOCK_END = re.compile(r'\s*\}')
 RE_HOR_LABEL = re.compile(r'\s*hl\s+(.*)')
 RE_VER_LABEL = re.compile(r'\s*vl\s+(.*)')
 
 
-class NewLine:
+class NewLine(object):
     """An instruction to move elements to a next line"""
 
     def required_columns(self):
@@ -47,7 +48,7 @@ class NewLine:
     def to_string(self):
         return "\\\\\n"
 
-class HorizontalLabel:
+class HorizontalLabel(object):
     """A label placed horizontally"""
 
     def __init__(self, container, label):
@@ -63,9 +64,10 @@ class HorizontalLabel:
 
     def to_string(self):
 	return (r'\multicolumn{' + str(self.container.ncol - 1) + '}{|c|}{' +
+        #r'\adjustbox{angle=180,margin=0 0 0 0.5em}{' + self.label + "}} \\\\\n")
          self.label + "} \\\\\n")
 
-class VerticalLabel:
+class VerticalLabel(object):
     """A label placed vertically"""
 
     def __init__(self, container, label):
@@ -87,11 +89,12 @@ class VerticalLabel:
 
         is_last = self.ordinal == self.container.ncol - 1
         r += r'\multicolumn{1}{|c' + ('|' if is_last else '') + '}'
-        r += r'{\adjustbox{angle=90,margin=0 0 0 0.5em}{' + self.label + '}}'
+        r += r'{\adjustbox{angle=' + self.container.vertical_angle()
+        r += ',margin=0 0 0 0.5em}{' + self.label + '}}'
         r += "\\\\\n" if is_last else "&\n"
         return r
 
-class HorizontalBox:
+class Box(object):
     """Contents of a box"""
 
     def __init__(self, container):
@@ -126,6 +129,27 @@ class HorizontalBox:
         self.contents.append(e)
         self.ncol += e.required_columns()
 
+class HorizontalBox(Box):
+    """Contents of a horizontal box"""
+    def __init__(self, container):
+        super(HorizontalBox, self).__init__(container)
+
+    def vertical_angle(self):
+        return '90'
+
+class VerticalBox(Box):
+    """Contents of a horizontal box rotated by 90 degrees"""
+    def __init__(self, container):
+        super(VerticalBox, self).__init__(container)
+
+    def vertical_angle(self):
+        return '-90'
+
+    def to_string(self):
+        return ("\\rotatebox{90}{\n" +
+                super(VerticalBox, self).to_string() +
+                "}\n")
+
 def process_box(args, file_name, file_input, box):
     """Process a box's contents, adding them as elements to the returned box"""
     for line in file_input:
@@ -147,9 +171,13 @@ def process_line(args, file_name, file_input, line, container):
     if not line:
         return NewLine()
 
-    if RE_HORIZONTAL_BOX.match(line):
+    if RE_HOR_BOX.match(line):
         return process_box(args, file_name, file_input,
                            HorizontalBox(container))
+
+    if RE_VER_BOX.match(line):
+        return process_box(args, file_name, file_input,
+                           VerticalBox(container))
 
     matched = RE_HOR_LABEL.match(line)
     if matched:
