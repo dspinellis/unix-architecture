@@ -26,7 +26,7 @@ import argparse
 import re
 import sys
 
-RE_BOX = re.compile(r'\s*hbox\s*\{')
+RE_HORIZONTAL_BOX = re.compile(r'\s*hbox\s*\{')
 RE_BLOCK_END = re.compile(r'\s*\}')
 RE_HOR_LABEL = re.compile(r'\s*hl\s+(.*)')
 RE_VER_LABEL = re.compile(r'\s*vl\s+(.*)')
@@ -126,9 +126,8 @@ class HorizontalBox:
         self.contents.append(e)
         self.ncol += e.required_columns()
 
-def process_box(args, file_name, file_input, container):
+def process_box(args, file_name, file_input, box):
     """Process a box's contents, adding them as elements to the returned box"""
-    box = HorizontalBox(container)
     for line in file_input:
         if RE_BLOCK_END.match(line):
             return box
@@ -148,8 +147,9 @@ def process_line(args, file_name, file_input, line, container):
     if not line:
         return NewLine()
 
-    if RE_BOX.match(line):
-        return process_box(args, file_name, file_input, container)
+    if RE_HORIZONTAL_BOX.match(line):
+        return process_box(args, file_name, file_input,
+                           HorizontalBox(container))
 
     matched = RE_HOR_LABEL.match(line)
     if matched:
@@ -164,7 +164,7 @@ def process_line(args, file_name, file_input, line, container):
 def process_file(args, file_name, file_input):
     """File processing function"""
 
-    box = process_box(args, file_name, file_input, None)
+    box = process_box(args, file_name, file_input, HorizontalBox(None))
     print(box.to_string())
 
 def main():
