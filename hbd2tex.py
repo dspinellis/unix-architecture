@@ -16,16 +16,17 @@
 #
 
 """
-Covnert a hirerchical box diagram into LaTeX
+Convert a hirerchical box diagram into LaTeX
 """
 
 from __future__ import absolute_import
 from __future__ import print_function
+
 import argparse
 import re
 import sys
 
-RE_BOX = re.compile(r'\s*b\s*\{')
+RE_BOX = re.compile(r'\s*hbox\s*\{')
 RE_BLOCK_END = re.compile(r'\s*\}')
 RE_HOR_LABEL = re.compile(r'\s*hl\s+(.*)')
 RE_VER_LABEL = re.compile(r'\s*vl\s+(.*)')
@@ -90,7 +91,7 @@ class VerticalLabel:
         r += "\\\\\n" if is_last else "&\n"
         return r
 
-class Box:
+class HorizontalBox:
     """Contents of a box"""
 
     def __init__(self, container):
@@ -127,7 +128,7 @@ class Box:
 
 def process_box(args, file_name, file_input, container):
     """Process a box's contents, adding them as elements to the returned box"""
-    box = Box(container)
+    box = HorizontalBox(container)
     for line in file_input:
         if RE_BLOCK_END.match(line):
             return box
