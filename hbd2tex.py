@@ -27,6 +27,7 @@ import re
 import sys
 
 RE_HOR_BOX = re.compile(r'\s*hbox\s*\{')
+RE_HOR_BOX_LABEL = re.compile(r'\s*hbox\s+([^{\s].*)')
 RE_VER_BOX = re.compile(r'\s*vbox\s*\{')
 RE_PLAIN_BOX = re.compile(r'\s*pbox\s*\{')
 RE_BLOCK_END = re.compile(r'\s*\}')
@@ -200,6 +201,13 @@ def process_line(args, file_name, file_input, line, container):
     matched = RE_HOR_LABEL.match(line)
     if matched:
         return HorizontalLabel(container, matched.group(1))
+
+    # A box with a single horizontal label
+    matched = RE_HOR_BOX_LABEL.match(line)
+    if matched:
+        box = HorizontalBox(container)
+        box.add_element(HorizontalLabel(box, matched.group(1)))
+        return box
 
     matched = RE_VER_LABEL.match(line)
     if matched:
