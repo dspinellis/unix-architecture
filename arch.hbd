@@ -107,42 +107,77 @@ hbox {
 
   vbox {
     hl Kernel Utility Functions
-    vl sleep/wakeup
-    vl malloc/free
-    vl panic
-    vl fuword, byte, ..
-    vl spl
-    vl suser
-    vl callout
-    vl log, printf
-    vl physio
-    vl copyin/out
-    vl vslock/unlock
-    vl mbuf
-    vl signal
-    vl sbuf
-    vl atomic\_*
-    vl condvar
-    vl critival\_*
-    vl kobj
-    vl kthread
-    vl ktr
-    vl mutex
-    vl sx
-    vl lockmgr
-    vl sema
-    vl mbchain
-    vl swi
-    vl taskqueue
-    vl uidinfo
-    vl uma
-    vl bswap*
-    vl alq
-    vl mbpool
-    vl rman
-    vl sleepq\_*
-    vl crypto
-    vl rwlock
+    hbox {
+      hl Generic
+      vl bitset
+      vl mbuf\_tags
+      vl socket
+      vl osd
+      vl nvlist
+    }
+    hbox {
+      hl Memory Management
+      vl malloc/free
+      vl fuword, ...
+      vl mbuf
+      vl sbuf
+      vl mbchain
+      vl pbuf
+      vl uma
+      vl vmem
+      vl ...
+    }
+    hbox {
+      hl Multitasking
+      vl ithread
+      vl kthread
+      vl swi
+      vl taskque
+      vl kproc
+      vl ...
+    }
+    hbox {
+      hl Privilige Mgmt
+      vl priv
+      vl mac
+      vl acl
+      vl ...
+    }
+
+    hbox {
+      hl Operations
+      vl panic
+      vl ktr
+      vl alq
+      vl stack
+      vl watchdog
+      vl dtrace
+      vl sysctl
+      vl ...
+    }
+    hbox {
+      hl Synchronization
+      vl signal
+      vl atomic\_*
+      vl condvar\_*
+      vl critical\_*
+      vl mutex
+      vl sema
+      vl sx
+      vl *lock
+      vl ...
+    }
+    hbox {
+      hl Virtualization
+      vl driver
+      vl devclass
+      vl device
+      vl rman
+      vl crypto
+      vl usb*
+      vl cpuset
+      vl ...
+    }
   }
   pbox {
     hbox {
@@ -168,6 +203,7 @@ hbox {
 	      vl UDF
 	      vl devfs
 	      vl procfs
+	      vl ...
 	    }
 
 	    hbox Buffer cache
@@ -184,7 +220,7 @@ hbox {
 	      vl IP 4/6
 	    }
 
-	    hbox NETGRAPH
+	    hbox NETGRAPH: Graph-based networking
 	  }
 	}
       }
