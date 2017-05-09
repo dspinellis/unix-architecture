@@ -1,5 +1,5 @@
 hbox {
-  hl User Space
+  hl \bfseries{User Space}
   hbox {
     hl User commands
     hbox {
@@ -207,9 +207,8 @@ hbox {
   }
 }
 
-
-hbox {
-  hl Kernel Space
+hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
+  hl \bfseries{Kernel Space}
   hbox {
     hl System Call Interface
     vl File I/O
@@ -242,6 +241,12 @@ hbox {
     vl Multiplexed file I/O
     vl Kernel modules
     vl Jails
+  }
+  hbox {
+    hl Bootstrapping
+    vl Loaders
+    vl Configuration
+    vl Kernel modules
   }
 
   vbox {
@@ -320,7 +325,7 @@ hbox {
     }
   }
   pbox {
-    hbox {
+    hbox { # Based on McKusick and Neville-Neil. The Design and Implementation of the FreeBSD OS, Figure 6.1
       hl I/O Subsystem
       hbox {
 	hl Vnode, Object, active file entries, and VM Interfaces
@@ -420,8 +425,12 @@ hbox {
       vl Scheduler
       vl Memory management
       vl Inter-process communication
+      vl Debugging support
+      vl ...
     }
 
-    hbox \rule{23em}{0pt}Hardware and Architecture Abstractions\rule{32em}{0pt}
+    hbox \rule{36em}{0pt}Bus Virtualizations\rule{36em}{0pt}
+
+    hbox \rule{32em}{0pt}Hardware and Architecture Abstractions\rule{32em}{0pt}
   }
 }
