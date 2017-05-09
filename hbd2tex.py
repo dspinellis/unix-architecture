@@ -122,7 +122,7 @@ class Box(object):
             r +=  c.to_string()
         if self.contents:
             r += self.contents[-1].end_line()
-        r += vb + "\\end{tabular}\n"
+        r += vb + "\\end{tabular} "
         return r
 
     def add_element(self, e):
@@ -195,6 +195,21 @@ def process_file(args, file_name, file_input):
     box = process_box(args, file_name, file_input, HorizontalBox(None))
     print(box.to_string())
 
+def prologue():
+    """Begin a stand-alone LaTeX document"""
+    print(r"""\documentclass[a0]{standalone}
+
+\usepackage{adjustbox}
+\usepackage{array}
+\usepackage{graphicx}
+
+\begin{document}
+\textsf{""")
+
+def epilogue():
+    """Finish the standalone LaTeX document"""
+    print("}\n\end{document}\n")
+
 def main():
     """Program entry point"""
     parser = argparse.ArgumentParser(
@@ -210,12 +225,14 @@ def main():
     args = parser.parse_args()
     if args.long_option:
         print("Long option set\n")
+    prologue()
     for file_name in args.file:
         if file_name == '-':
             process_file(args, '<stdin>', sys.stdin)
         else:
             with open(file_name) as test_input:
                 process_file(args, file_name, test_input)
+    epilogue()
 
 if __name__ == "__main__":
     main()
