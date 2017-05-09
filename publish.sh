@@ -22,6 +22,7 @@ rm -rf *
 
 # Bring in current content
 cp -r ../docs/* .
+rm -f .gitignore
 
 if git diff --quiet ; then
   echo "No changes to the output on this push; exiting."
