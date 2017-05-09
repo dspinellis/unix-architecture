@@ -388,7 +388,7 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
 	  vl Tape
 	  vl ...
 	}
-	hbox {
+	hbox { # See http://www.win.tue.nl/~aeb/linux/lk/talks/lk-geom.pdf
 	  hl GEOM (disk I/O)
 	  hbox {
 	    hl Storage
