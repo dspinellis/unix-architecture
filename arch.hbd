@@ -109,6 +109,7 @@ hbox {
     hl Kernel Utility Functions
     hbox {
       hl Generic
+      vl ...
       vl bitset
       vl mbuf\_tags
       vl socket
@@ -117,6 +118,7 @@ hbox {
     }
     hbox {
       hl Memory Management
+      vl ...
       vl malloc/free
       vl fuword, ...
       vl mbuf
@@ -125,27 +127,27 @@ hbox {
       vl pbuf
       vl uma
       vl vmem
-      vl ...
     }
     hbox {
       hl Multitasking
+      vl ...
       vl ithread
       vl kthread
       vl swi
       vl taskque
       vl kproc
-      vl ...
     }
     hbox {
       hl Privilige Mgmt
+      vl ...
       vl priv
       vl mac
       vl acl
-      vl ...
     }
 
     hbox {
       hl Operations
+      vl ...
       vl panic
       vl ktr
       vl alq
@@ -153,10 +155,10 @@ hbox {
       vl watchdog
       vl dtrace
       vl sysctl
-      vl ...
     }
     hbox {
       hl Synchronization
+      vl ...
       vl signal
       vl atomic\_*
       vl condvar\_*
@@ -165,10 +167,10 @@ hbox {
       vl sema
       vl sx
       vl *lock
-      vl ...
     }
     hbox {
       hl Virtualization
+      vl ...
       vl driver
       vl devclass
       vl device
@@ -176,7 +178,6 @@ hbox {
       vl crypto
       vl usb*
       vl cpuset
-      vl ...
     }
   }
   pbox {
@@ -206,7 +207,7 @@ hbox {
 	      vl ...
 	    }
 
-	    hbox Buffer cache
+	    hbox Buffer/page cache
 	  }
 	  pbox {
 	    hbox Socket
@@ -280,5 +281,7 @@ hbox {
       vl Memory management
       vl Inter-process communication
     }
+
+    hbox \rule{28em}{0pt}Hardware and Architecture Abstractions and Virtualization\rule{28em}{0pt}
   }
 }
