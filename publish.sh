@@ -32,3 +32,6 @@ fi
 git add --all .
 git commit -m "Deploy to GitHub Pages: ${SHA}"
 git push
+
+cd ..
+rm -rf web
