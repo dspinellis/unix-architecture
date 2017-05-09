@@ -220,7 +220,14 @@ hbox {
 	      vl IP 4/6
 	    }
 
-	    hbox NETGRAPH: Graph-based networking
+	    hbox { # See http://www.netbsd.org/gallery/presentations/ast/2012_AsiaBSDCon/Tutorial_NETGRAPH.pdf#page=19
+	      hl NETGRAPH
+	      vl ng\_async
+	      vl ng\_atm
+	      vl ng\_bpf
+	      vl ... (50+)
+	      vl ng\_vlan
+	    }
 	  }
 	}
       }
