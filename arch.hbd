@@ -75,74 +75,167 @@ hbox {
 
 hbox {
   hl Kernel Space
+  hbox {
+    hl System Call Interface
+    vl File I/O
+    vl Filesystem
+    vl Process
+    vl Process tracing
+    vl IPC
+    vl Memory mapping
+    vl Shared memory
+    vl Semaphores
+    vl Scheduling control
+    vl Asynchronous I/O
+    vl Kernel events
+    vl KSE
+    vl Memory locking
+    vl File pointer I/O
+    vl Per-process timers
+    vl Message queues
+    vl Process descriptors
+    vl Error message management
+    vl Real time message queues
+    vl Capsicum
+    vl BSM
+    vl Feed-forward system clock
+    vl User groups
+    vl Multiplexed file I/O
+    vl Kernel modules
+    vl Jails
+  }
+
+  vbox {
+    hl Kernel Utility Functions
+    vl sleep/wakeup
+    vl malloc/free
+    vl panic
+    vl fuword, byte, ..
+    vl spl
+    vl suser
+    vl callout
+    vl log, printf
+    vl physio
+    vl copyin/out
+    vl vslock/unlock
+    vl mbuf
+    vl signal
+    vl sbuf
+    vl atomic\_*
+    vl condvar
+    vl critival\_*
+    vl kobj
+    vl kthread
+    vl ktr
+    vl mutex
+    vl sx
+    vl lockmgr
+    vl sema
+    vl mbchain
+    vl swi
+    vl taskqueue
+    vl uidinfo
+    vl uma
+    vl bswap*
+    vl alq
+    vl mbpool
+    vl rman
+    vl sleepq\_*
+    vl crypto
+    vl rwlock
+  }
   pbox {
-    vbox {
-      hl Kernel Utility Functions
-      vl sleep/wakeup
-      vl malloc/free
-      vl panic
-      vl fuword, byte, ..
-      vl spl
-      vl suser
-      vl callout
-      vl log, printf
-      vl physio
-      vl copyin/out
-      vl vslock/unlock
-      vl mbuf
-      vl signal
-      vl sbuf
-      vl atomic\_*
-      vl condvar
-      vl critival\_*
-      vl kobj
-      vl kthread
-      vl ktr
-      vl mutex
-      vl sx
-      vl lockmgr
-      vl sema
-      vl mbchain
-      vl swi
-      vl taskqueue
-      vl uidinfo
-      vl uma
-      vl bswap*
-      vl alq
-      vl mbpool
-      vl rman
-      vl sleepq\_*
-      vl crypto
-      vl rwlock
+    hbox {
+      hl I/O Subsystem
+      hbox {
+	hl Vnode, Object, active file entries, and VM Interfaces
+	pbox { # Special devices, named, and sockets
+	  hbox {
+	    hl Special Devices
+	    vl tty \& discipline
+	    vl Raw character
+	    vl Raw disk
+	  }
+	  pbox {
+	    hbox VM
+	    hbox { # See http://kos.enix.org/pub/vfssun.pdf#page=2
+	      hl Filesystem layers/types
+	      vl UFS
+	      vl FFS
+	      vl NFS
+	      vl CD9660
+	      vl Ext2FS
+	      vl UDF
+	      vl devfs
+	      vl procfs
+	    }
+
+	    hbox Buffer cache
+	  }
+	  pbox {
+	    hbox Socket
+
+	    hbox {
+	      hl Network protocols
+	      vl TCP
+	      vl UDP
+	      vl ICMP 4/6
+	      vl IPSec
+	      vl IP 4/6
+	    }
+
+	    hbox NETGRAPH
+	  }
+	}
+      }
+
+      hbox {
+	hl Device Drivers and Abstractions
+	hbox {
+	  hl Character devices
+	  vl Keyboard
+	  vl Mouse
+	  vl Printer
+	  vl Tape
+	  vl ...
+	}
+	hbox {
+	  hl Disk I/O (GEOM)
+	  hbox { # See https://people.freebsd.org/~mav/disk.pdf#page=19
+	    hl Common Access (CAM)
+	    vl ATA
+	    vl SATA
+	    vl SPI
+	    vl SAS
+	    vl ...
+	  }
+	}
+	hbox {
+	  hl Network interface drivers
+	  hbox {
+	    hl 802.11 layer
+	    hl 802.11 drivers
+	  }
+	  hbox {
+	    hl Native drivers
+	    vl if\_ae
+	    vl if\_age
+	    vl ... (100+)
+	    vl if\_xl
+	  }
+	  hbox {
+	    hl NDIS wrapper
+	    hl NDIS drivers
+	  }
+	  }
+	}
+      }
     }
     hbox {
-      hl System Call Interface
-      vl File I/O
-      vl Filesystem
-      vl Process
-      vl Process tracing
-      vl IPC
-      vl Memory mapping
-      vl Shared memory
-      vl Semaphores
-      vl Scheduling control
-      vl Asynchronous I/O
-      vl Kernel events
-      vl KSE
-      vl Memory locking
-      vl File pointer I/O
-      vl Per-process timers
-      vl Message queues
-      vl Process descriptors
-      vl Error message management
-      vl Real time message queues
-      vl Capsicum
-      vl BSM
-      vl Feed-forward system clock
-      vl User groups
-      vl Multiplexed file I/O
-      vl Kernel modules
-      vl Jails
+      hl Process Control Subsystem
+      vl Scheduler
+      vl Memory management
+      vl Inter-process communication
     }
   }
 }
