@@ -117,7 +117,7 @@ class Box(object):
         else:
             hb = ''
             vb = ''
-        r = r'\begin{tabular}{' + hb + ('l' * self.ncol) + hb + "}\n" + vb
+        r = r'\begin{tabular}[t]{' + hb + ('l' * self.ncol) + hb + "}\n" + vb
         for c in self.contents:
             r +=  c.to_string()
         if self.contents:
@@ -197,7 +197,7 @@ def process_file(args, file_name, file_input):
 
 def prologue():
     """Begin a stand-alone LaTeX document"""
-    print(r"""\documentclass[a0]{standalone}
+    print(r"""\documentclass{standalone}
 
 \usepackage{adjustbox}
 \usepackage{array}
