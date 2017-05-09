@@ -75,72 +75,74 @@ hbox {
 
 hbox {
   hl Kernel Space
-  vbox {
-    hl Kernel Utility Functions
-    vl sleep/wakeup
-    vl malloc/free
-    vl panic
-    vl fuword, byte, ..
-    vl spl
-    vl suser
-    vl callout
-    vl log, printf
-    vl physio
-    vl copyin/out
-    vl vslock/unlock
-    vl mbuf
-    vl signal
-    vl sbuf
-    vl atomic\_*
-    vl condvar
-    vl critival\_*
-    vl kobj
-    vl kthread
-    vl ktr
-    vl mutex
-    vl sx
-    vl lockmgr
-    vl sema
-    vl mbchain
-    vl swi
-    vl taskqueue
-    vl uidinfo
-    vl uma
-    vl bswap*
-    vl alq
-    vl mbpool
-    vl rman
-    vl sleepq\_*
-    vl crypto
-    vl rwlock
-  }
-  hbox {
-    hl System Call Interface
-    vl File I/O
-    vl Filesystem
-    vl Process
-    vl Process tracing
-    vl IPC
-    vl Memory mapping
-    vl Shared memory
-    vl Semaphores
-    vl Scheduling control
-    vl Asynchronous I/O
-    vl Kernel events
-    vl KSE
-    vl Memory locking
-    vl File pointer I/O
-    vl Per-process timers
-    vl Message queues
-    vl Process descriptors
-    vl Error message management
-    vl Real time message queues
-    vl Capsicum
-    vl BSM
-    vl Feed-forward system clock
-    vl User groups
-    vl Multiplexed file I/O
-    vl Kernel modules
-    vl Jails
+  pbox {
+    vbox {
+      hl Kernel Utility Functions
+      vl sleep/wakeup
+      vl malloc/free
+      vl panic
+      vl fuword, byte, ..
+      vl spl
+      vl suser
+      vl callout
+      vl log, printf
+      vl physio
+      vl copyin/out
+      vl vslock/unlock
+      vl mbuf
+      vl signal
+      vl sbuf
+      vl atomic\_*
+      vl condvar
+      vl critival\_*
+      vl kobj
+      vl kthread
+      vl ktr
+      vl mutex
+      vl sx
+      vl lockmgr
+      vl sema
+      vl mbchain
+      vl swi
+      vl taskqueue
+      vl uidinfo
+      vl uma
+      vl bswap*
+      vl alq
+      vl mbpool
+      vl rman
+      vl sleepq\_*
+      vl crypto
+      vl rwlock
+    }
+    hbox {
+      hl System Call Interface
+      vl File I/O
+      vl Filesystem
+      vl Process
+      vl Process tracing
+      vl IPC
+      vl Memory mapping
+      vl Shared memory
+      vl Semaphores
+      vl Scheduling control
+      vl Asynchronous I/O
+      vl Kernel events
+      vl KSE
+      vl Memory locking
+      vl File pointer I/O
+      vl Per-process timers
+      vl Message queues
+      vl Process descriptors
+      vl Error message management
+      vl Real time message queues
+      vl Capsicum
+      vl BSM
+      vl Feed-forward system clock
+      vl User groups
+      vl Multiplexed file I/O
+      vl Kernel modules
+      vl Jails
+    }
   }
 }

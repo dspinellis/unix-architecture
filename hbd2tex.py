@@ -28,6 +28,7 @@ import sys
 
 RE_HOR_BOX = re.compile(r'\s*hbox\s*\{')
 RE_VER_BOX = re.compile(r'\s*vbox\s*\{')
+RE_PLAIN_BOX = re.compile(r'\s*pbox\s*\{')
 RE_BLOCK_END = re.compile(r'\s*\}')
 RE_HOR_LABEL = re.compile(r'\s*hl\s+(.*)')
 RE_VER_LABEL = re.compile(r'\s*vl\s+(.*)')
@@ -100,7 +101,6 @@ class Box(object):
     def __init__(self, container):
         self.contents = []
         self.ncol = 1
-        self.draw_border = True if container else False
         self.container = container
 
     def required_columns(self):
@@ -111,23 +111,26 @@ class Box(object):
         return "\\\\ \\\\\n"
 
     def to_string(self):
-        if self.draw_border:
-            hb = '|'
-            vb = "\\hline% box border\n"
-        else:
-            hb = ''
-            vb = ''
-        r = r'\begin{tabular}[t]{' + hb + ('l' * self.ncol) + hb + "}\n" + vb
+        r = (r'\begin{tabular}[t]{' + self.horizontal_border() +
+             ('l' * self.ncol) + self.horizontal_border() + "}\n" +
+             self.vertical_border())
         for c in self.contents:
             r +=  c.to_string()
         if self.contents:
             r += self.contents[-1].end_line()
-        r += vb + "\\end{tabular} "
+        r += self.vertical_border() + "\\end{tabular} "
         return r
 
     def add_element(self, e):
         self.contents.append(e)
         self.ncol += e.required_columns()
+
+    def horizontal_border(self):
+        return '|';
+
+    def vertical_border(self):
+        return "\\hline% box border\n";
+
 
 class HorizontalBox(Box):
     """Contents of a horizontal box"""
@@ -136,6 +139,17 @@ class HorizontalBox(Box):
 
     def vertical_angle(self):
         return '90'
+
+class PlainBox(HorizontalBox):
+    """A horizontal box without a border"""
+    def __init__(self, container):
+        super(PlainBox, self).__init__(container)
+
+    def horizontal_border(self):
+        return '';
+
+    def vertical_border(self):
+        return '';
 
 class VerticalBox(Box):
     """Contents of a horizontal box rotated by 90 degrees"""
@@ -146,7 +160,7 @@ class VerticalBox(Box):
         return '-90'
 
     def to_string(self):
-        return ("\\rotatebox{90}{\n" +
+        return ("\\rotatebox[origin=r]{90}{\n" +
                 super(VerticalBox, self).to_string() +
                 "}\n")
 
@@ -179,6 +193,10 @@ def process_line(args, file_name, file_input, line, container):
         return process_box(args, file_name, file_input,
                            VerticalBox(container))
 
+    if RE_PLAIN_BOX.match(line):
+        return process_box(args, file_name, file_input,
+                           PlainBox(container))
+
     matched = RE_HOR_LABEL.match(line)
     if matched:
         return HorizontalLabel(container, matched.group(1))
@@ -192,7 +210,7 @@ def process_line(args, file_name, file_input, line, container):
 def process_file(args, file_name, file_input):
     """File processing function"""
 
-    box = process_box(args, file_name, file_input, HorizontalBox(None))
+    box = process_box(args, file_name, file_input, PlainBox(None))
     print(box.to_string())
 
 def prologue():
