@@ -20,7 +20,7 @@ hbox {
       vl ...
     }
     hbox {
-      hl Multiuser Mgmt
+      hl Multiuser Commands
       vl login
       vl chown
       vl chmod
@@ -29,7 +29,7 @@ hbox {
       vl ...
     }
     hbox {
-      hl Number processing
+      hl Number Processing
       vl dc
       vl bc
       vl units
@@ -45,7 +45,7 @@ hbox {
     }
 
     hbox {
-      hl User messaging
+      hl User Messaging
       vl mail
       vl mesg
       vl write
@@ -134,19 +134,76 @@ hbox {
     hl Libraries
     hbox {
       hl C Standard
-      vl stdlib
-      vl stdio
       vl ctype
+      vl math
+      vl stdio
+      vl stdlib
       vl string
+      vl time
       vl ...
     }
     hbox {
       hl Operating System
       vl fcntl
       vl unistd
-      vl ioctl
+      vl socket
+      vl paths
+      vl getopt
+      vl err
       vl ...
     }
+    hbox {
+      hl Peripheral Access
+      vl curses
+      vl termcap
+      vl tcgetattr
+      vl usbhid
+      vl nandfs
+      vl cam
+      vl geom
+      vl ...
+    }
+    hbox {
+      hl System File Access
+      vl getlogin
+      vl getgrent
+      vl getprotoent
+      vl getservent
+      vl ...
+    }
+    hbox {
+      hl Data Handling
+      vl dbm
+      vl dbopen
+      vl btree
+      vl hash
+      vl recno
+      vl mpool
+      vl queue
+    }
+    hbox { # find . -name Makefile | xargs grep -w LIBADD | awk '{$1 = "" ; print }' | tr -c a-z \\n | sort | uniq -c | sort -rn | more
+      hl Security
+      vl ssl
+      vl krb
+      vl crypto
+      vl crypt
+      vl n ...
+    }
+    hbox {
+      hl Internationalization
+      vl catopen
+      vl localeconv
+      vl iconv
+      vl mb*
+      vl ...
+    }
+    hbox {
+      hl Threads
+      vl stdthreads
+      vl thr
+      vl pthread
+    }
+    hbox ...
   }
 }
 
@@ -270,7 +327,8 @@ hbox {
 	pbox { # Special devices, named, and sockets
 	  hbox {
 	    hl Special Devices
-	    vl tty \& discipline
+	    vl Line discipline
+	    vl tty
 	    vl Raw character
 	    vl Raw disk
 	  }
@@ -295,7 +353,7 @@ hbox {
 	    hbox Socket
 
 	    hbox {
-	      hl Network protocols
+	      hl Network Protocols
 	      vl TCP
 	      vl UDP
 	      vl ICMP 4/6
@@ -318,7 +376,7 @@ hbox {
       hbox {
 	hl Device Drivers and Abstractions
 	hbox {
-	  hl Character devices
+	  hl Character Devices
 	  vl Keyboard
 	  vl Mouse
 	  vl Printer
@@ -337,7 +395,7 @@ hbox {
 	  }
 	}
 	hbox {
-	  hl Network interface drivers
+	  hl Network Interface Drivers
 	  hbox {
 	    hl 802.11 layer
 	    hl 802.11 drivers
