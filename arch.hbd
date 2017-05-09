@@ -78,7 +78,9 @@ hbox {
   hbox {
     hl System Call Interface
     vl File I/O
-    vl Filesystem
+    vl Mountable filesystems
+    vl File access control (ACL)
+    vl File permissions
     vl Process
     vl Process tracing
     vl IPC
@@ -93,12 +95,14 @@ hbox {
     vl File pointer I/O
     vl Per-process timers
     vl Message queues
+    vl Message passing
     vl Process descriptors
+    vl Extended file attributes
     vl Error message management
     vl Real time message queues
     vl Capsicum
-    vl BSM
     vl Feed-forward system clock
+    vl Auditing (BSM)
     vl User groups
     vl Multiplexed file I/O
     vl Kernel modules
@@ -282,6 +286,6 @@ hbox {
       vl Inter-process communication
     }
 
-    hbox \rule{28em}{0pt}Hardware and Architecture Abstractions and Virtualization\rule{28em}{0pt}
+    hbox \rule{23em}{0pt}Hardware and Architecture Abstractions\rule{32em}{0pt}
   }
 }
