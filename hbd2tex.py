@@ -160,7 +160,7 @@ class VerticalBox(Box):
         return '-90'
 
     def to_string(self):
-        return ("\\rotatebox[origin=r]{90}{\n" +
+        return ("\\rotatebox[origin=rt]{90}{\n" +
                 super(VerticalBox, self).to_string() +
                 "}\n")
 
