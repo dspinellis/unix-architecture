@@ -66,7 +66,6 @@ class HorizontalLabel(object):
 
     def to_string(self):
 	return (r'\multicolumn{' + str(self.container.ncol - 1) + '}{|c|}{' +
-        #r'\adjustbox{angle=180,margin=0 0 0 0.5em}{' + self.label + "}} \\\\\n")
          self.label + "} \\\\\n")
 
 class VerticalLabel(object):
@@ -109,28 +108,31 @@ class Box(object):
 
     def end_line(self):
         """String to terminate a table line consisting of this element"""
-        return "\\\\ \\\\\n"
+        return "\\\\\n"
 
     def to_string(self):
-        r = (r'\begin{tabular}[t]{' + self.horizontal_border() +
-             ('l' * self.ncol) + self.horizontal_border() + "}\n" +
-             self.vertical_border())
+        r = (r'\begin{tabular}[t]{' + self.vertical_border() +
+             ('l' * self.ncol) + self.vertical_border() + "}\n" +
+             self.top_horizontal_border())
         for c in self.contents:
             r +=  c.to_string()
         if self.contents:
-            r += self.contents[-1].end_line()
-        r += self.vertical_border() + "\\end{tabular} "
+                r += self.contents[-1].end_line()
+        r += self.bottom_horizontal_border() + "\\end{tabular} "
         return r
 
     def add_element(self, e):
         self.contents.append(e)
         self.ncol += e.required_columns()
 
-    def horizontal_border(self):
+    def vertical_border(self):
         return '|';
 
-    def vertical_border(self):
+    def top_horizontal_border(self):
         return "\\hline% box border\n";
+
+    def bottom_horizontal_border(self):
+        return "\\hline\\noalign{\\vskip 2mm}% box border\n";
 
 
 class HorizontalBox(Box):
@@ -146,10 +148,13 @@ class PlainBox(HorizontalBox):
     def __init__(self, container):
         super(PlainBox, self).__init__(container)
 
-    def horizontal_border(self):
+    def vertical_border(self):
         return '';
 
-    def vertical_border(self):
+    def top_horizontal_border(self):
+        return '';
+
+    def bottom_horizontal_border(self):
         return '';
 
 class VerticalBox(Box):
