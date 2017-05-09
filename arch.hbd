@@ -389,15 +389,50 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
 	  vl ...
 	}
 	hbox {
-	  hl Disk I/O (GEOM)
-	  hbox { # See https://people.freebsd.org/~mav/disk.pdf#page=19
-	    hl Common Access (CAM)
-	    vl ATA
-	    vl SATA
-	    vl SPI
-	    vl SAS
+	  hl GEOM (disk I/O)
+	  hbox {
+	    hl Storage
+	    vl stripe
+	    vl mirror
+	    vl raid3
+	    vl raid5
+	    vl concat
 	    vl ...
 	  }
+
+	  hbox {
+	    hl Encryption/Compression
+	    vl eli
+	    vl bde
+	    vl shsec
+	    vl uzip
+	  }
+
+	  hbox {
+	    hl Filesystem
+	    vl label
+	    vl journal
+	    vl cache
+	    vl mbr
+	    vl bsd
+	  }
+
+	  hbox {
+	    hl Virtualization
+	    vl md
+	    vl nop
+	    vl fate
+	    vl virstor
+	    vl ...
+	  }
+	}
+	hbox { # See https://people.freebsd.org/~mav/disk.pdf#page=19
+	  hl Common Access (CAM)
+	  vl ATA
+	  vl SATA
+	  vl SPI
+	  vl SAS
+	  vl ...
 	}
 	hbox {
 	  hl Network Interface Drivers
