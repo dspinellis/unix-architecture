@@ -77,11 +77,14 @@ hbox {
     hbox ...
   }
   hbox {
-    hl Administrator Commands
+    hl Administrator and System Commands
     hbox {
       hl Filesystem Management
       vl fsck
       vl newfs
+      vl gpart
+      vl mount
+      vl umount
       vl ...
     }
     hbox {
@@ -91,6 +94,40 @@ hbox {
       vl arp
       vl ...
     }
+    hbox {
+      hl User Management
+      vl adduser
+      vl vipw
+      vl sa
+      vl quota*
+      vl ...
+    }
+    hbox {
+      hl Statistics
+      vl iostat
+      vl vmstat
+      vl pstat
+      vl ...
+    }
+
+    hbox {
+      hl Network Servers
+      vl sshd
+      vl ftpd
+      vl ntpd
+      vl sendmail
+      vl routed
+      vl rpc.*
+      vl ...
+    }
+    hbox {
+      hl Scheduling
+      vl cron
+      vl periodic
+      vl rc.*
+      vl atrun
+    }
+    hbox ...
   }
 
   hbox {
