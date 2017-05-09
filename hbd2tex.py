@@ -90,8 +90,8 @@ class VerticalLabel(object):
 
         is_last = self.ordinal == self.container.ncol - 1
         r += r'\multicolumn{1}{|c' + ('|' if is_last else '') + '}'
-        r += r'{\adjustbox{angle=' + self.container.vertical_angle()
-        r += ',margin=0 0 0 0.5em}{' + self.label + '}}'
+        r += r'{' + self.container.vertical_adjustbox()
+        r += '{' + self.label + '}}'
         r += "\\\\\n" if is_last else "&\n"
         return r
 
@@ -140,8 +140,11 @@ class HorizontalBox(Box):
     def __init__(self, container):
         super(HorizontalBox, self).__init__(container)
 
-    def vertical_angle(self):
-        return '90'
+    def vertical_adjustbox(self):
+        if self.container:
+            return self.container.vertical_adjustbox()
+        else:
+            return r'\adjustbox{angle=90,margin=0 0 0 0.5em}'
 
 class PlainBox(HorizontalBox):
     """A horizontal box without a border"""
@@ -162,8 +165,8 @@ class VerticalBox(Box):
     def __init__(self, container):
         super(VerticalBox, self).__init__(container)
 
-    def vertical_angle(self):
-        return '-90'
+    def vertical_adjustbox(self):
+        return r'\adjustbox{angle=-90,margin=0 0.5em 0 0}'
 
     def to_string(self):
         return ("\\rotatebox[origin=rt]{90}{\n" +
