@@ -3,19 +3,53 @@ hbox {
   hbox {
     hl User commands
     hbox {
-      hl Text Processing
-      vl wc
-      vl grep
-      vl sort
+      hl Program Development
+      vl as
+      vl cc
+      vl ld
+      vl nm
       vl ...
     }
     hbox {
       hl File Management
       vl ls
-      vl find
+      vl cp
+      vl cmp
       vl mkdir
-      vl chdir
+      vl touch
       vl ...
+    }
+    hbox {
+      hl Multiuser Mgmt
+      vl login
+      vl chown
+      vl chmod
+      vl su
+      vl who
+      vl ...
+    }
+    hbox {
+      hl Number processing
+      vl dc
+      vl bc
+      vl units
+      vl expr
+    }
+    hbox {
+      hl Text Processing
+      vl wc
+      vl grep
+      vl sort
+      vl uniq
+      vl ...
+    }
+
+    hbox {
+      hl User messaging
+      vl mail
+      vl mesg
+      vl write
+      vl talk
     }
     hbox {
       hl Little Languages
@@ -25,15 +59,22 @@ hbox {
       vl ...
     }
     hbox {
-      hl Document Preparation
-        vl roff
-        vl nroff
-        vl troff
-        vl eqn
-        vl tbl
-        vl spell
+      hl Network clients
+        vl scp
+        vl telnet
+        vl ftp
+        vl rcp
         vl ...
     }
+    hbox {
+      hl Document Preparation
+        vl *roff
+        vl eqn
+        vl tbl
+        vl refer
+        vl ...
+    }
+    hbox ...
   }
   hbox {
     hl Administrator Commands
