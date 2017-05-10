@@ -1,5 +1,5 @@
-arch.aux
-arch.log
-arch.pdf
-arch.tex
+*.aux
+*.log
+*.pdf
+*.tex
 docs/

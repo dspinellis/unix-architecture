@@ -1,0 +1,227 @@
+hbox {
+  hl \bfseries{User Space}
+  hbox {
+    hl User commands
+    hbox {
+      hl Program Development
+      vl as
+      vl ar
+      vl b
+      vl bas
+      vl ed
+      vl db
+      vl for
+      vl ld
+      vl nm
+      vl ...
+    }
+    hbox {
+      hl File Management
+      vl ls
+      vl cp
+      vl cmp
+      vl mkdir
+      vl ln
+      vl ...
+    }
+    hbox {
+      hl Multiuser Commands
+      vl login
+      vl chown
+      vl chmod
+      vl su
+      vl who
+      vl ...
+    }
+
+    hbox {
+      hl Text Processing
+      vl wc
+      vl cat
+      vl sort
+    }
+    hbox {
+      hl User Messaging
+      vl mail
+      vl mesg
+      vl write
+    }
+    hbox {
+      hl Document Preparation
+      vl roff
+      vl form
+      vl pr
+      vl ...
+    }
+    hbox {
+      hl Games
+      vl bj
+      vl chess
+      vl moo
+      vl ttt
+    }
+  }
+  hbox {
+    hl Administrator and System Commands
+    hbox {
+      hl Filesystem Management
+      vl check
+      vl mkfs
+      vl mount
+      vl umount
+      vl rkd
+      vl rkl
+      vl rkf
+      vl ...
+    }
+    hbox {
+      hl Peripheral access
+      vl bcd
+      vl dtf
+      vl lbppt
+      vl rew
+      vl tap
+      vl type
+      vl ...
+    }
+    hbox ...
+  }
+
+  hbox {
+    hl Library
+    hbox {
+      hl Assembly Subroutines Library
+      vl atof
+      vl atoi
+      vl ctime
+      vl exp
+      vl fptrap
+      vl ftoa
+      vl get
+      vl itoa
+      vl log
+      vl mesg
+      vl ptime
+      vl putc
+      vl sin
+      vl switch
+    }
+    hbox {
+      hl B Library
+      vl char
+      vl getchr
+      vl putchr
+      vl printf
+      vl lchar
+      vl execl
+      vl execv
+      vl intr
+      vl 1ink
+      vl makdir
+      vl ctime
+      vl ...
+    }
+  }
+}
+
+hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
+  hl \bfseries{Kernel Space}
+  hbox {
+    hl System Call Interface
+    vl break
+    vl cemt
+    vl chdir
+    vl chmod
+    vl chown
+    vl close
+    vl creat
+    vl exec
+    vl exit
+    vl fork
+    vl fstat
+    vl getuid
+    vl gtty
+    vl ilgins
+    vl intr
+    vl link
+    vl mkdir
+    vl mdate
+    vl mount
+    vl open
+    vl quit
+    vl read
+    vl rele
+    vl seek
+    vl setuid
+    vl smdate
+    vl stat
+    vl stime
+    vl stty
+    vl tell
+    vl time
+    vl umount
+    vl unlink
+    vl wait
+    vl write
+  }
+  hbox Boot Loader
+
+  vbox {
+    hl Kernel Utility Functions
+    vl alloc
+    vl free
+    vl panic
+    vl namei
+    vl sleep
+    vl wakeup
+    vl mget
+    vl access
+    vl iget
+  }
+  pbox {
+    hbox {
+      hl I/O Subsystem
+      hbox {
+        pbox { # Special devices, named, and sockets
+          hbox {
+            hl Special Devices
+            vl Line discipline
+            vl tty
+            vl Raw character
+            vl Raw disk
+          }
+	  hbox {
+	    hl Filesystem
+
+	    hbox inode layer
+
+	    hbox block layer
+        }
+      }
+
+      hbox {
+        hl Device Drivers
+        hbox {
+          hl Character Devices
+          vl Keyboard
+          vl Printer
+          vl Paper tape
+          vl ...
+        }
+	hbox {
+	  hl Block Devices
+	  vl rk: RK03 disk
+	  vl rf: RF11 disk
+	  vl mem
+	}
+      }
+    }
+  }
+  hbox {
+    hl Process Control Subsystem
+    vl Scheduler
+    vl Swap manager
+    vl Memory manager
+    vl ...
+  }
+}

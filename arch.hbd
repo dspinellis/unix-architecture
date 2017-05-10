@@ -211,6 +211,7 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
   hl \bfseries{Kernel Space}
   hbox {
     hl System Call Interface
+    vl File management
     vl File I/O
     vl Mountable filesystems
     vl File access control (ACL)

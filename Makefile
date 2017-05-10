@@ -1,19 +1,22 @@
 export SITEDIR=docs
 
-all: $(SITEDIR)/index.html $(SITEDIR)/arch.pdf
+.SUFFIXES:.hbd .tex .pdf
+
+%.tex: %.hbd
+	./hbd2tex.py $? >$@
+
+%.pdf: %.tex
+	pdflatex $?
+
+$(SITEDIR)/%.pdf: %.pdf
+	cp $? $@
+
+all: $(SITEDIR)/index.html $(SITEDIR)/arch.pdf $(SITEDIR)/arch-V1.pdf
 
 $(SITEDIR)/index.html: index.html
 	mkdir -p $(SITEDIR)
 	cp index.html $(SITEDIR)/
 
-arch.tex: arch.hbd
-	hbd2tex.py $? >$@
-
-arch.pdf: arch.tex
-	pdflatex $?
-
-$(SITEDIR)/arch.pdf: arch.pdf
-	cp $? $@
 
 dist: all
 	./publish.sh
