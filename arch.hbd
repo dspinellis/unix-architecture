@@ -3,6 +3,15 @@ hbox {
   hbox {
     hl User commands
     hbox {
+      hl Shells
+      vl sh
+      vl csh
+      vl bash
+      vl zsh
+      vl tcsh
+      vl ...
+    }
+    hbox {
       hl Program Development
       vl as
       vl cc
@@ -35,6 +44,7 @@ hbox {
       vl units
       vl expr
     }
+
     hbox {
       hl Text Processing
       vl wc
@@ -43,7 +53,6 @@ hbox {
       vl uniq
       vl ...
     }
-
     hbox {
       hl User Messaging
       vl mail

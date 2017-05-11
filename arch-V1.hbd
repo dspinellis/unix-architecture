@@ -2,6 +2,7 @@ hbox {
   hl \bfseries{User Space}
   hbox {
     hl User commands
+    hbox Shell (sh)
     hbox {
       hl Program Development
       vl as
@@ -25,6 +26,13 @@ hbox {
       vl ...
     }
     hbox {
+      hl Text Processing
+      vl wc
+      vl cat
+      vl sort
+    }
+
+    hbox {
       hl Multiuser Commands
       vl login
       vl chown
@@ -32,13 +40,6 @@ hbox {
       vl su
       vl who
       vl ...
-    }
-
-    hbox {
-      hl Text Processing
-      vl wc
-      vl cat
-      vl sort
     }
     hbox {
       hl User Messaging
