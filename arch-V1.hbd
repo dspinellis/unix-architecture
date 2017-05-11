@@ -116,7 +116,7 @@ hbox {
       vl execl
       vl execv
       vl intr
-      vl 1ink
+      vl link
       vl makdir
       vl ctime
       vl ...
