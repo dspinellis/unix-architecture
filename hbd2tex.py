@@ -40,7 +40,7 @@ def cell_color(container, color):
     if not color and container and container.color:
         return container.color
     else:
-        return r'{\cellcolor{' + color + '}}' if color else ''
+        return r'\cellcolor{' + color + '}' if color else ''
 
 class NewLine(object):
     """An instruction to move elements to a next line"""
@@ -256,6 +256,9 @@ def prologue():
 \usepackage[table,svgnames]{xcolor}
 
 \begin{document}
+
+\arrayrulewidth=1pt
+
 \textsf{""")
 
 def epilogue():
