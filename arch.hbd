@@ -4,14 +4,14 @@ hbox {
     hl User commands
     hbox {
       hl Shells
-      vl sh
+      vl [color=SkyBlue] sh
       vl csh
       vl bash
       vl zsh
       vl tcsh
       vl ...
     }
-    hbox {
+    hbox [color=SkyBlue] {
       hl Program Development
       vl as
       vl cc
@@ -21,14 +21,14 @@ hbox {
     }
     hbox {
       hl File Management
-      vl ls
-      vl cp
-      vl cmp
-      vl mkdir
+      vl [color=SkyBlue] ls
+      vl [color=SkyBlue] cp
+      vl [color=SkyBlue] cmp
+      vl [color=SkyBlue] mkdir
       vl touch
       vl ...
     }
-    hbox {
+    hbox [color=SkyBlue] {
       hl Multiuser Commands
       vl login
       vl chown
@@ -47,17 +47,17 @@ hbox {
 
     hbox {
       hl Text Processing
-      vl wc
+      vl [color=SkyBlue] wc
       vl grep
-      vl sort
+      vl [color=SkyBlue] sort
       vl uniq
       vl ...
     }
     hbox {
       hl User Messaging
-      vl mail
-      vl mesg
-      vl write
+      vl [color=SkyBlue] mail
+      vl [color=SkyBlue] mesg
+      vl [color=SkyBlue] write
       vl talk
     }
     hbox {
@@ -77,7 +77,7 @@ hbox {
     }
     hbox {
       hl Document Preparation
-        vl *roff
+        vl [color=SkyBlue] *roff
         vl eqn
         vl tbl
         vl refer
@@ -92,8 +92,8 @@ hbox {
       vl fsck
       vl newfs
       vl gpart
-      vl mount
-      vl umount
+      vl [color=Bisque] mount
+      vl [color=Bisque] umount
       vl ...
     }
     hbox {
@@ -144,11 +144,11 @@ hbox {
     hbox {
       hl C Standard
       vl ctype
-      vl math
-      vl stdio
-      vl stdlib
+      vl [color=LightGreen] math
+      vl [color=LightGreen] stdio
+      vl [color=LightGreen] stdlib
       vl string
-      vl time
+      vl [color=LightGreen] time
       vl ...
     }
     hbox {
@@ -220,12 +220,12 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
   hl \bfseries{Kernel Space}
   hbox {
     hl System Call Interface
-    vl File management
-    vl File I/O
-    vl Mountable filesystems
+    vl [color=LightPink]File management
+    vl [color=LightPink]File I/O
+    vl [color=LightPink]Mountable filesystems
     vl File access control (ACL)
-    vl File permissions
-    vl Process
+    vl [color=LightPink]File permissions
+    vl [color=LightPink]Process
     vl Process tracing
     vl IPC
     vl Memory mapping
@@ -254,7 +254,7 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
   }
   hbox {
     hl Bootstrapping
-    vl Loaders
+    vl [color=Khaki] Loaders
     vl Configuration
     vl Kernel modules
   }
@@ -269,12 +269,12 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
       vl socket
       vl osd
       vl nvlist
+      vl [color=Plum] namei
     }
     hbox {
       hl Memory Management
       vl ...
-      vl malloc/free
-      vl fuword, ...
+      vl [color=Plum] malloc/free
       vl mbuf
       vl sbuf
       vl mbchain
@@ -302,13 +302,13 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
     hbox {
       hl Operations
       vl ...
-      vl panic
       vl ktr
       vl alq
       vl stack
       vl watchdog
       vl dtrace
       vl sysctl
+      vl [color=Plum] panic
     }
     hbox {
       hl Synchronization
@@ -321,6 +321,7 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
       vl sema
       vl sx
       vl *lock
+      vl [color=Plum] wakeup
     }
     hbox {
       hl Virtualization
@@ -340,7 +341,7 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
       hbox {
 	hl Vnode, Object, active file entries, and VM Interfaces
 	pbox { # Special devices, named, and sockets
-	  hbox {
+	  hbox [color=LightSkyBlue] {
 	    hl Special Devices
 	    vl Line discipline
 	    vl tty
@@ -392,9 +393,9 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
 	hl Device Drivers and Abstractions
 	hbox {
 	  hl Character Devices
-	  vl Keyboard
+	  vl [color=LightSkyBlue] Keyboard
 	  vl Mouse
-	  vl Printer
+	  vl [color=LightSkyBlue] Printer
 	  vl Tape
 	  vl ...
 	}
@@ -467,8 +468,8 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
     }
     hbox {
       hl Process Control Subsystem
-      vl Scheduler
-      vl Memory management
+      vl [color=Khaki] Scheduler
+      vl [color=Khaki] Memory management
       vl Inter-process communication
       vl Debugging support
       vl ...

@@ -26,6 +26,7 @@ import argparse
 import re
 import sys
 
+RE_COLOR = re.compile(r'\[\s*color\s*=(\w+)\s*\]')
 RE_HOR_BOX = re.compile(r'\s*hbox\s*\{')
 RE_HOR_BOX_LABEL = re.compile(r'\s*hbox\s+([^{\s].*)')
 RE_VER_BOX = re.compile(r'\s*vbox\s*\{')
@@ -34,6 +35,12 @@ RE_BLOCK_END = re.compile(r'\s*\}')
 RE_HOR_LABEL = re.compile(r'\s*hl\s+(.*)')
 RE_VER_LABEL = re.compile(r'\s*vl\s+(.*)')
 
+def cell_color(container, color):
+    """Return the color of a cell given its container and the specified color"""
+    if not color and container and container.color:
+        return container.color
+    else:
+        return r'{\cellcolor{' + color + '}}' if color else ''
 
 class NewLine(object):
     """An instruction to move elements to a next line"""
@@ -53,9 +60,10 @@ class NewLine(object):
 class HorizontalLabel(object):
     """A label placed horizontally"""
 
-    def __init__(self, container, label):
+    def __init__(self, container, label, color):
         self.label = label
         self.container = container
+        self.color = cell_color(container, color)
 
     def required_columns(self):
         return 0
@@ -66,15 +74,16 @@ class HorizontalLabel(object):
 
     def to_string(self):
 	return (r'\multicolumn{' + str(self.container.ncol - 1) + '}{|c|}{' +
-         self.label + "} \\\\\n")
+         self.color + self.label + "} \\\\\n")
 
 class VerticalLabel(object):
     """A label placed vertically"""
 
-    def __init__(self, container, label):
+    def __init__(self, container, label, color):
         self.label = label
         self.container = container
         self.ordinal = container.ncol
+        self.color = cell_color(container, color)
 
     def required_columns(self):
         return 1
@@ -91,17 +100,18 @@ class VerticalLabel(object):
         is_last = self.ordinal == self.container.ncol - 1
         r += r'\multicolumn{1}{|c' + ('|' if is_last else '') + '}'
         r += r'{' + self.container.vertical_adjustbox()
-        r += '{' + self.label + '}}'
+        r += '{' + self.color + self.label + '}}'
         r += "\\\\\n" if is_last else "&\n"
         return r
 
 class Box(object):
     """Contents of a box"""
 
-    def __init__(self, container):
+    def __init__(self, container, color):
         self.contents = []
         self.ncol = 1
         self.container = container
+        self.color = cell_color(container, color)
 
     def required_columns(self):
         return 0
@@ -118,7 +128,7 @@ class Box(object):
             r +=  c.to_string()
         if self.contents:
                 r += self.contents[-1].end_line()
-        r += self.bottom_horizontal_border() + "\\end{tabular} "
+        r += self.bottom_horizontal_border() + r'\end{tabular}\hspace{1em}'
         return r
 
     def add_element(self, e):
@@ -137,8 +147,8 @@ class Box(object):
 
 class HorizontalBox(Box):
     """Contents of a horizontal box"""
-    def __init__(self, container):
-        super(HorizontalBox, self).__init__(container)
+    def __init__(self, container, color):
+        super(HorizontalBox, self).__init__(container, color)
 
     def vertical_adjustbox(self):
         if self.container:
@@ -148,8 +158,8 @@ class HorizontalBox(Box):
 
 class PlainBox(HorizontalBox):
     """A horizontal box without a border"""
-    def __init__(self, container):
-        super(PlainBox, self).__init__(container)
+    def __init__(self, container, color):
+        super(PlainBox, self).__init__(container, color)
 
     def vertical_border(self):
         return '';
@@ -162,8 +172,8 @@ class PlainBox(HorizontalBox):
 
 class VerticalBox(Box):
     """Contents of a horizontal box rotated by 90 degrees"""
-    def __init__(self, container):
-        super(VerticalBox, self).__init__(container)
+    def __init__(self, container, color):
+        super(VerticalBox, self).__init__(container, color)
 
     def vertical_adjustbox(self):
         return r'\adjustbox{angle=-90,margin=0 0.5em 0 0}'
@@ -194,39 +204,46 @@ def process_line(args, file_name, file_input, line, container):
     if not line:
         return NewLine()
 
+    matched = RE_COLOR.search(line)
+    if matched:
+        color = matched.group(1)
+        line = RE_COLOR.sub('', line)
+    else:
+        color = ''
+
     if RE_HOR_BOX.match(line):
         return process_box(args, file_name, file_input,
-                           HorizontalBox(container))
+                           HorizontalBox(container, color))
 
     if RE_VER_BOX.match(line):
         return process_box(args, file_name, file_input,
-                           VerticalBox(container))
+                           VerticalBox(container, color))
 
     if RE_PLAIN_BOX.match(line):
         return process_box(args, file_name, file_input,
-                           PlainBox(container))
+                           PlainBox(container, color))
 
     matched = RE_HOR_LABEL.match(line)
     if matched:
-        return HorizontalLabel(container, matched.group(1))
+        return HorizontalLabel(container, matched.group(1), color)
 
     # A box with a single horizontal label
     matched = RE_HOR_BOX_LABEL.match(line)
     if matched:
-        box = HorizontalBox(container)
-        box.add_element(HorizontalLabel(box, matched.group(1)))
+        box = HorizontalBox(container, color)
+        box.add_element(HorizontalLabel(box, matched.group(1), color))
         return box
 
     matched = RE_VER_LABEL.match(line)
     if matched:
-        return VerticalLabel(container, matched.group(1))
+        return VerticalLabel(container, matched.group(1), color)
 
     sys.exit('Syntax error in line: ' + line)
 
 def process_file(args, file_name, file_input):
     """File processing function"""
 
-    box = process_box(args, file_name, file_input, PlainBox(None))
+    box = process_box(args, file_name, file_input, PlainBox(None, None))
     print(box.to_string())
 
 def prologue():
@@ -236,6 +253,7 @@ def prologue():
 \usepackage{adjustbox}
 \usepackage{array}
 \usepackage{graphicx}
+\usepackage[table,svgnames]{xcolor}
 
 \begin{document}
 \textsf{""")
