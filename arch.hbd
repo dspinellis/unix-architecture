@@ -475,8 +475,8 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
       vl ...
     }
 
-    hbox \rule{36em}{0pt}Bus Virtualizations\rule{36em}{0pt}
+    hbox \rule{45em}{0pt}Bus Virtualizations\rule{45em}{0pt}
 
-    hbox \rule{32em}{0pt}Hardware and Architecture Abstractions\rule{32em}{0pt}
+    hbox \rule{41em}{0pt}Hardware and Architecture Abstractions\rule{41em}{0pt}
   }
 }
