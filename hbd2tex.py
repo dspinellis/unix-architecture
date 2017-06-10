@@ -35,12 +35,9 @@ RE_BLOCK_END = re.compile(r'\s*\}')
 RE_HOR_LABEL = re.compile(r'\s*hl\s+(.*)')
 RE_VER_LABEL = re.compile(r'\s*vl\s+(.*)')
 
-def cell_color(container, color):
+def cell_color(color):
     """Return the color of a cell given its container and the specified color"""
-    if not color and container and container.color:
-        return container.color
-    else:
-        return r'\cellcolor{' + color + '}' if color else ''
+    return r'\cellcolor{' + color + '}' if color else ''
 
 class NewLine(object):
     """An instruction to move elements to a next line"""
@@ -80,7 +77,7 @@ class HorizontalLabel(Contained):
     def __init__(self, container, label, color):
         self.label = label
         self.container = container
-        self.color = cell_color(container, color)
+        self.color = color
         super(HorizontalLabel, self).__init__(container)
 
     def required_columns(self):
@@ -92,7 +89,7 @@ class HorizontalLabel(Contained):
 
     def to_string(self):
 	return (r'\multicolumn{' + str(self.container.ncol - 1) + '}{|c|}{' +
-         self.color + self.label + "} \\\\\n")
+         cell_color(self.color) + self.label + "} \\\\\n")
 
 class VerticalLabel(Contained):
     """A label placed vertically"""
@@ -101,7 +98,7 @@ class VerticalLabel(Contained):
         self.label = label
         self.container = container
         self.ordinal = container.ncol
-        self.color = cell_color(container, color)
+        self.color = color
         super(VerticalLabel, self).__init__(container)
 
     def required_columns(self):
@@ -128,7 +125,7 @@ class VerticalLabel(Contained):
         else:
             r += '|c' + ('|' if is_last else '') + '}'
         r += r'{' + self.container.vertical_adjustbox()
-        r += '{' + self.color + self.label + '}}'
+        r += '{' + cell_color(self.color) + self.label + '}}'
         r += "\\\\\n" if is_last else "&\n"
         return r
 
@@ -139,7 +136,7 @@ class Box(Contained):
         self.contents = []
         self.ncol = 1
         self.container = container
-        self.color = cell_color(container, color)
+        self.color = color
         self.separate = separate
         super(Box, self).__init__(container)
 
@@ -156,18 +153,23 @@ class Box(Contained):
                 element + right)
 
     def to_string(self):
+        if self.color:
+            r = r'\colorbox{' + self.color + "}{%\n"
+        else:
+            r = '{'
+
         vb = self.vertical_border()
         if self.separate_boxes():
             spec = self.compose_repeat('l', '||', vb, vb)
         else:
             spec = self.compose_repeat('l', '', vb, vb)
-        r = (r'\begin{tabular}[t]{' + spec + "}\n" +
+        r += (r'\begin{tabular}[t]{' + spec + "}\n" +
              self.top_horizontal_border())
         for c in self.contents:
             r +=  c.to_string()
         if self.contents:
                 r += self.contents[-1].end_line()
-        r += self.bottom_horizontal_border() + r'\end{tabular}\hspace{1em}'
+        r += self.bottom_horizontal_border() + r'\end{tabular}}\hspace{1em}'
         return r
 
     def add_element(self, e):
