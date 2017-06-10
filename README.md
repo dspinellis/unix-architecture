@@ -18,4 +18,6 @@ The language allows you to define:
 
 Boxes are put side by side; a blank line continues the layout on the next line.
 
-The Python script generates a stand-alone LaTeX document.
+The Python script generates a stand-alone LaTeX document, ehich can then be converted to PDF.
+This idea has been taken on by the [boxes](https://github.com/panos1962/boxes)
+project to generate HTML output.
