@@ -3,7 +3,7 @@ export SITEDIR=docs
 .SUFFIXES:.hbd .tex .pdf
 
 %.tex: %.hbd
-	./hbd2tex.py $? >$@
+	./hbd2tex.py -s $? >$@
 
 %.pdf: %.tex
 	pdflatex $?

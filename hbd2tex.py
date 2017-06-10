@@ -57,13 +57,31 @@ class NewLine(object):
     def to_string(self):
         return "\\\\\n"
 
-class HorizontalLabel(object):
+class Contained(object):
+    """An graphical element (e.g. box, label) that can be contained
+    within another"""
+    def __init__(self, container):
+        self.container = container
+
+    def top_container(self):
+        """Container at the top of the hierarchy"""
+        if self.container:
+            return self.container.top_container()
+        else:
+            return self
+
+    def separate_boxes(self):
+        """Return true if boxes are to be presented in stand-alone form"""
+        return self.top_container().separate
+
+class HorizontalLabel(Contained):
     """A label placed horizontally"""
 
     def __init__(self, container, label, color):
         self.label = label
         self.container = container
         self.color = cell_color(container, color)
+        super(HorizontalLabel, self).__init__(container)
 
     def required_columns(self):
         return 0
@@ -76,7 +94,7 @@ class HorizontalLabel(object):
 	return (r'\multicolumn{' + str(self.container.ncol - 1) + '}{|c|}{' +
          self.color + self.label + "} \\\\\n")
 
-class VerticalLabel(object):
+class VerticalLabel(Contained):
     """A label placed vertically"""
 
     def __init__(self, container, label, color):
@@ -84,6 +102,7 @@ class VerticalLabel(object):
         self.container = container
         self.ordinal = container.ncol
         self.color = cell_color(container, color)
+        super(VerticalLabel, self).__init__(container)
 
     def required_columns(self):
         return 1
@@ -95,23 +114,34 @@ class VerticalLabel(object):
     def to_string(self):
         r = ''
         if self.ordinal == 1:
-            r += "\\hline% vl\n"
+            if self.separate_boxes():
+                r += (r'\hhline{' + self.container.compose_repeat(
+                    '-', '||', '||', '||') + "}% vl\n")
+            else:
+                r += "\\hline% vl\n"
 
         is_last = self.ordinal == self.container.ncol - 1
-        r += r'\multicolumn{1}{|c' + ('|' if is_last else '') + '}'
+        is_first = self.ordinal == 1
+        r += r'\multicolumn{1}{'
+        if self.separate_boxes():
+            r += ('||' if is_first else '') + 'c||}'
+        else:
+            r += '|c' + ('|' if is_last else '') + '}'
         r += r'{' + self.container.vertical_adjustbox()
         r += '{' + self.color + self.label + '}}'
         r += "\\\\\n" if is_last else "&\n"
         return r
 
-class Box(object):
+class Box(Contained):
     """Contents of a box"""
 
-    def __init__(self, container, color):
+    def __init__(self, container, color, separate=False):
         self.contents = []
         self.ncol = 1
         self.container = container
         self.color = cell_color(container, color)
+        self.separate = separate
+        super(Box, self).__init__(container)
 
     def required_columns(self):
         return 0
@@ -120,9 +150,18 @@ class Box(object):
         """String to terminate a table line consisting of this element"""
         return "\\\\\n"
 
+    def compose_repeat(self, element, separator, left, right):
+        """Return l e s e s ... e r"""
+        return (left + (element + separator) * (self.ncol - 2) +
+                element + right)
+
     def to_string(self):
-        r = (r'\begin{tabular}[t]{' + self.vertical_border() +
-             ('l' * self.ncol) + self.vertical_border() + "}\n" +
+        vb = self.vertical_border()
+        if self.separate_boxes():
+            spec = self.compose_repeat('l', '||', vb, vb)
+        else:
+            spec = self.compose_repeat('l', '', vb, vb)
+        r = (r'\begin{tabular}[t]{' + spec + "}\n" +
              self.top_horizontal_border())
         for c in self.contents:
             r +=  c.to_string()
@@ -136,19 +175,27 @@ class Box(object):
         self.ncol += e.required_columns()
 
     def vertical_border(self):
-        return '|';
+        if self.separate_boxes() and self.ncol > 1:
+            return '||';
+        else:
+            return '|';
 
     def top_horizontal_border(self):
-        return "\\hline% box border\n";
+        return "\\hline% top box border\n";
 
     def bottom_horizontal_border(self):
-        return "\\hline\\noalign{\\vskip 2mm}% box border\n";
+        if self.separate_boxes() and self.ncol > 1:
+            r = (r'\hhline{' + self.compose_repeat(':=:', 'b', '|b', 'b|') +
+                    "}% bottom box border\n")
+        else:
+            r = r'\hline'
+        return r + "\\noalign{\\vskip 2mm}% bottom box border\n"
 
 
 class HorizontalBox(Box):
     """Contents of a horizontal box"""
-    def __init__(self, container, color):
-        super(HorizontalBox, self).__init__(container, color)
+    def __init__(self, container, color, separate=False):
+        super(HorizontalBox, self).__init__(container, color, separate)
 
     def vertical_adjustbox(self):
         if self.container:
@@ -158,8 +205,8 @@ class HorizontalBox(Box):
 
 class PlainBox(HorizontalBox):
     """A horizontal box without a border"""
-    def __init__(self, container, color):
-        super(PlainBox, self).__init__(container, color)
+    def __init__(self, container, color, separate=False):
+        super(PlainBox, self).__init__(container, color, separate)
 
     def vertical_border(self):
         return '';
@@ -183,18 +230,18 @@ class VerticalBox(Box):
                 super(VerticalBox, self).to_string() +
                 "}\n")
 
-def process_box(args, file_name, file_input, box):
+def process_box(file_name, file_input, box):
     """Process a box's contents, adding them as elements to the returned box"""
     for line in file_input:
         if RE_BLOCK_END.match(line):
             return box
         else:
-            e = process_line(args, file_name, file_input, line, box)
+            e = process_line(file_name, file_input, line, box)
             if e:
                 box.add_element(e)
     return box
 
-def process_line(args, file_name, file_input, line, container):
+def process_line(file_name, file_input, line, container):
     """Process a single element line return an element object, None if empty"""
     line = line.rstrip()
     if line and line[0] == '#':
@@ -212,15 +259,15 @@ def process_line(args, file_name, file_input, line, container):
         color = ''
 
     if RE_HOR_BOX.match(line):
-        return process_box(args, file_name, file_input,
+        return process_box(file_name, file_input,
                            HorizontalBox(container, color))
 
     if RE_VER_BOX.match(line):
-        return process_box(args, file_name, file_input,
+        return process_box(file_name, file_input,
                            VerticalBox(container, color))
 
     if RE_PLAIN_BOX.match(line):
-        return process_box(args, file_name, file_input,
+        return process_box(file_name, file_input,
                            PlainBox(container, color))
 
     matched = RE_HOR_LABEL.match(line)
@@ -243,7 +290,8 @@ def process_line(args, file_name, file_input, line, container):
 def process_file(args, file_name, file_input):
     """File processing function"""
 
-    box = process_box(args, file_name, file_input, PlainBox(None, None))
+    box = process_box(file_name, file_input,
+                      PlainBox(None, None, args.separate_boxes))
     print(box.to_string())
 
 def prologue():
@@ -253,6 +301,7 @@ def prologue():
 \usepackage{adjustbox}
 \usepackage{array}
 \usepackage{graphicx}
+\usepackage{hhline}
 \usepackage[table,svgnames]{xcolor}
 
 \begin{document}
@@ -269,8 +318,8 @@ def main():
     """Program entry point"""
     parser = argparse.ArgumentParser(
         description='Generic Python program')
-    parser.add_argument('-e', '--long-option',
-                        help='Long option',
+    parser.add_argument('-s', '--separate-boxes',
+                        help='Place vbox elements into separate boxes',
                         action='store_true')
 
     parser.add_argument('file',
@@ -278,8 +327,6 @@ def main():
                         nargs='*', default='-',
                         type=str)
     args = parser.parse_args()
-    if args.long_option:
-        print("Long option set\n")
     prologue()
     for file_name in args.file:
         if file_name == '-':
