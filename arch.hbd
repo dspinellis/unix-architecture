@@ -3,7 +3,7 @@ hbox {
   hbox {
     hl User commands
     hbox {
-      hl Shells
+      hl [Shells]
       vl [color=SkyBlue] sh
       vl csh
       vl bash
@@ -12,7 +12,7 @@ hbox {
       vl ...
     }
     hbox [color=SkyBlue] {
-      hl Program Development
+      hl [Program Development]
       vl as
       vl cc
       vl ld
@@ -20,7 +20,7 @@ hbox {
       vl ...
     }
     hbox {
-      hl File Management
+      hl [File Management]
       vl [color=SkyBlue] ls
       vl [color=SkyBlue] cp
       vl [color=SkyBlue] cmp
@@ -29,7 +29,7 @@ hbox {
       vl ...
     }
     hbox [color=SkyBlue] {
-      hl Multiuser Commands
+      hl [Multiuser Commands]
       vl login
       vl chown
       vl chmod
@@ -38,7 +38,7 @@ hbox {
       vl ...
     }
     hbox {
-      hl Number Processing
+      hl [Number Processing]
       vl dc
       vl bc
       vl units
@@ -46,7 +46,7 @@ hbox {
     }
 
     hbox {
-      hl Text Processing
+      hl [Text Processing]
       vl [color=SkyBlue] wc
       vl grep
       vl [color=SkyBlue] sort
@@ -54,21 +54,21 @@ hbox {
       vl ...
     }
     hbox {
-      hl User Messaging
+      hl [User Messaging]
       vl [color=SkyBlue] mail
       vl [color=SkyBlue] mesg
       vl [color=SkyBlue] write
       vl talk
     }
     hbox {
-      hl Little Languages
+      hl [Little Languages]
       vl sed
       vl awk
       vl m4
       vl ...
     }
     hbox {
-      hl Network clients
+      hl [Network clients]
         vl scp
         vl telnet
         vl ftp
@@ -76,7 +76,7 @@ hbox {
         vl ...
     }
     hbox {
-      hl Document Preparation
+      hl [Document Preparation]
         vl [color=SkyBlue] *roff
         vl eqn
         vl tbl
@@ -88,7 +88,7 @@ hbox {
   hbox {
     hl Administrator and System Commands
     hbox {
-      hl Filesystem Management
+      hl [Filesystem Management]
       vl fsck
       vl newfs
       vl gpart
@@ -97,14 +97,14 @@ hbox {
       vl ...
     }
     hbox {
-      hl Networking
+      hl [Networking]
       vl ifconfig
       vl route
       vl arp
       vl ...
     }
     hbox {
-      hl User Management
+      hl [User Management]
       vl adduser
       vl vipw
       vl sa
@@ -112,7 +112,7 @@ hbox {
       vl ...
     }
     hbox {
-      hl Statistics
+      hl [Statistics]
       vl iostat
       vl vmstat
       vl pstat
@@ -120,7 +120,7 @@ hbox {
     }
 
     hbox {
-      hl Network Servers
+      hl [Network Servers]
       vl sshd
       vl ftpd
       vl ntpd
@@ -130,7 +130,7 @@ hbox {
       vl ...
     }
     hbox {
-      hl Scheduling
+      hl [Scheduling]
       vl cron
       vl periodic
       vl rc.*
@@ -142,7 +142,7 @@ hbox {
   hbox {
     hl Libraries
     hbox {
-      hl C Standard
+      hl [C Standard]
       vl ctype
       vl [color=LightGreen] math
       vl [color=LightGreen] stdio
@@ -152,7 +152,7 @@ hbox {
       vl ...
     }
     hbox {
-      hl Operating System
+      hl [Operating System]
       vl fcntl
       vl unistd
       vl socket
@@ -162,7 +162,7 @@ hbox {
       vl ...
     }
     hbox {
-      hl Peripheral Access
+      hl [Peripheral Access]
       vl curses
       vl termcap
       vl tcgetattr
@@ -173,7 +173,7 @@ hbox {
       vl ...
     }
     hbox {
-      hl System File Access
+      hl [System File Access]
       vl getlogin
       vl getgrent
       vl getprotoent
@@ -181,7 +181,7 @@ hbox {
       vl ...
     }
     hbox {
-      hl Data Handling
+      hl [Data Handling]
       vl dbm
       vl dbopen
       vl btree
@@ -191,7 +191,7 @@ hbox {
       vl queue
     }
     hbox { # find . -name Makefile | xargs grep -w LIBADD | awk '{$1 = "" ; print }' | tr -c a-z \\n | sort | uniq -c | sort -rn | more
-      hl Security
+      hl [Security]
       vl ssl
       vl krb
       vl crypto
@@ -199,7 +199,7 @@ hbox {
       vl n ...
     }
     hbox {
-      hl Internationalization
+      hl [Internationalization]
       vl catopen
       vl localeconv
       vl iconv
@@ -207,7 +207,7 @@ hbox {
       vl ...
     }
     hbox {
-      hl Threads
+      hl [Threads]
       vl stdthreads
       vl thr
       vl pthread
@@ -253,7 +253,7 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
     vl Jails
   }
   hbox {
-    hl Bootstrapping
+    hl [Bootstrapping]
     vl [color=Khaki] Loaders
     vl Configuration
     vl Kernel modules
@@ -262,7 +262,7 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
   vbox {
     hl Kernel Utility Functions
     hbox {
-      hl Generic
+      hl [Generic]
       vl ...
       vl bitset
       vl mbuf\_tags
@@ -272,7 +272,7 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
       vl [color=Plum] namei
     }
     hbox {
-      hl Memory Management
+      hl [Memory Management]
       vl ...
       vl [color=Plum] malloc/free
       vl mbuf
@@ -283,7 +283,7 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
       vl vmem
     }
     hbox {
-      hl Multitasking
+      hl [Multitasking]
       vl ...
       vl ithread
       vl kthread
@@ -292,7 +292,7 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
       vl kproc
     }
     hbox {
-      hl Privilige Mgmt
+      hl [Privilige Mgmt]
       vl ...
       vl priv
       vl mac
@@ -300,7 +300,7 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
     }
 
     hbox {
-      hl Operations
+      hl [Operations]
       vl ...
       vl ktr
       vl alq
@@ -311,7 +311,7 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
       vl [color=Plum] panic
     }
     hbox {
-      hl Synchronization
+      hl [Synchronization]
       vl ...
       vl signal
       vl atomic\_*
@@ -324,7 +324,7 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
       vl [color=Plum] wakeup
     }
     hbox {
-      hl Virtualization
+      hl [Virtualization]
       vl ...
       vl driver
       vl devclass
@@ -337,9 +337,9 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
   }
   pbox {
     hbox { # Based on McKusick and Neville-Neil. The Design and Implementation of the FreeBSD OS, Figure 6.1
-      hl I/O Subsystem
+      hl [I/O Subsystem]
       hbox {
-	hl Vnode, Object, active file entries, and VM Interfaces
+	hl [Vnode, Object, active file entries, and VM Interfaces]
 	pbox { # Special devices, named, and sockets
 	  hbox [color=LightSkyBlue] {
 	    hl Special Devices
@@ -349,7 +349,7 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
 	    vl Raw disk
 	  }
 	  pbox {
-	    hbox VM
+	    hbox [VM]
 	    hbox { # See http://kos.enix.org/pub/vfssun.pdf#page=2
 	      hl Filesystem layers/types
 	      vl UFS
@@ -363,13 +363,13 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
 	      vl ...
 	    }
 
-	    hbox Buffer/page cache
+	    hbox [Buffer/page cache]
 	  }
 	  pbox {
 	    hbox Socket
 
 	    hbox {
-	      hl Network Protocols
+	      hl [Network Protocols]
 	      vl TCP
 	      vl UDP
 	      vl ICMP 4/6
@@ -436,6 +436,8 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
 	    vl virstor
 	    vl ...
 	  }
+
+	  hbox ...
 	}
 	hbox { # See https://people.freebsd.org/~mav/disk.pdf#page=19
 	  hl Common Access (CAM)
@@ -448,11 +450,11 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
 	hbox {
 	  hl Network Interface Drivers
 	  hbox {
-	    hl 802.11 layer
-	    hl 802.11 drivers
+	    hl [802.11 layer]
+	    hl [802.11 drivers]
 	  }
 	  hbox {
-	    hl Native drivers
+	    hl [Native drivers]
 	    vl if\_ae
 	    vl if\_age
 	    vl ... (100+)
@@ -467,16 +469,16 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
       }
     }
     hbox {
-      hl Process Control Subsystem
-      vl [color=Khaki] Scheduler
-      vl [color=Khaki] Memory management
-      vl Inter-process communication
-      vl Debugging support
+      hl [Process Control Subsystem]
+      vl [color=Khaki] [Scheduler]
+      vl [color=Khaki] [Memory management]
+      vl Inter-process [communication]
+      vl [Debugging support]
       vl ...
     }
 
-    hbox \rule{45em}{0pt}Bus Virtualizations\rule{45em}{0pt}
+    hbox \rule{45em}{0pt}[Bus Virtualizations]\rule{45em}{0pt}
 
-    hbox \rule{41em}{0pt}Hardware and Architecture Abstractions\rule{41em}{0pt}
+    hbox \rule{41em}{0pt}[Hardware and Architecture Abstractions]\rule{41em}{0pt}
   }
 }

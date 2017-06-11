@@ -4,7 +4,7 @@ hbox {
     hl User commands
     hbox [color=SkyBlue] Shell (sh)
     hbox [color=SkyBlue] {
-      hl Program Development
+      hl [Program Development]
       vl as
       vl ar
       vl b
@@ -17,7 +17,7 @@ hbox {
       vl ...
     }
     hbox [color=SkyBlue] {
-      hl File Management
+      hl [File Management]
       vl ls
       vl cp
       vl cmp
@@ -26,14 +26,14 @@ hbox {
       vl ...
     }
     hbox [color=SkyBlue] {
-      hl Text Processing
+      hl [Text Processing]
       vl wc
       vl cat
       vl sort
     }
 
     hbox [color=SkyBlue] {
-      hl Multiuser Commands
+      hl [Multiuser Commands]
       vl login
       vl chown
       vl chmod
@@ -42,20 +42,20 @@ hbox {
       vl ...
     }
     hbox [color=SkyBlue] {
-      hl User Messaging
+      hl [User Messaging]
       vl mail
       vl mesg
       vl write
     }
     hbox [color=SkyBlue] {
-      hl Document Preparation
+      hl [Document Preparation]
       vl roff
       vl form
       vl pr
       vl ...
     }
     hbox {
-      hl Games
+      hl [Games]
       vl bj
       vl chess
       vl moo
@@ -65,7 +65,7 @@ hbox {
   hbox {
     hl Administrator and System Commands
     hbox {
-      hl Filesystem Management
+      hl [Filesystem Management]
       vl check
       vl [color=Bisque] mkfs
       vl [color=Bisque] mount
@@ -76,7 +76,7 @@ hbox {
       vl ...
     }
     hbox {
-      hl Peripheral access
+      hl [Peripheral access]
       vl bcd
       vl dtf
       vl lbppt
@@ -91,7 +91,7 @@ hbox {
   hbox {
     hl Library
     hbox {
-      hl Assembly Subroutines Library
+      hl [Assembly Subroutines Library]
       vl [color=LightGreen] atof
       vl [color=LightGreen] atoi
       vl [color=LightGreen] ctime
@@ -108,7 +108,7 @@ hbox {
       vl switch
     }
     hbox {
-      hl B Library
+      hl [B Library]
       vl char
       vl [color=LightGreen] getchr
       vl [color=LightGreen] putchr
@@ -168,7 +168,7 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
   hbox [color=Khaki] Boot Loader
 
   vbox {
-    hl Kernel Utility Functions
+    hl [Kernel Utility Functions]
     vl alloc
     vl [color=Plum] free
     vl [color=Plum] panic
@@ -181,36 +181,36 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
   }
   pbox {
     hbox {
-      hl I/O Subsystem
+      hl [I/O Subsystem]
       hbox {
         pbox { # Special devices, named, and sockets
           hbox [color=LightSkyBlue] {
-            hl Special Devices
+            hl [Special Devices]
             vl Line discipline
             vl tty
             vl Raw character
             vl Raw disk
           }
 	  hbox {
-	    hl Filesystem
+	    hl [Filesystem]
 
-	    hbox [color=LightSkyBlue] inode layer
+	    hbox [color=LightSkyBlue] [inode layer]
 
-	    hbox block layer
+	    hbox [block layer]
         }
       }
 
       hbox {
         hl Device Drivers
         hbox {
-          hl Character Devices
+          hl [Character Devices]
           vl [color=LightSkyBlue] Keyboard
           vl [color=LightSkyBlue] Printer
           vl Paper tape
           vl ...
         }
 	hbox {
-	  hl Block Devices
+	  hl [Block Devices]
 	  vl rk: RK03 disk
 	  vl rf: RF11 disk
 	  vl mem
@@ -219,10 +219,10 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
     }
   }
   hbox {
-    hl Process Control Subsystem
-    vl [color=Khaki] Scheduler
-    vl Swap manager
-    vl [color=Khaki] Memory manager
+    hl [Process Control Subsystem]
+    vl [color=Khaki] [Scheduler]
+    vl [Swap manager]
+    vl [color=Khaki] [Memory manager]
     vl ...
   }
 }
