@@ -220,37 +220,37 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
   hl [adornlr=upspoon] \bfseries{Kernel Space}
   hbox {
     hl [adornlr=upspoon] System Call Interface
-    vl [color=LightPink]File management
-    vl [color=LightPink]File I/O
-    vl [color=LightPink]Mountable filesystems
-    vl File access control (ACL)
-    vl [color=LightPink]File permissions
-    vl [color=LightPink]Process
-    vl Process tracing
-    vl IPC
-    vl Memory mapping
-    vl Shared memory
-    vl Semaphores
-    vl Scheduling control
-    vl Asynchronous I/O
-    vl Kernel events
-    vl KSE
-    vl Memory locking
-    vl File pointer I/O
-    vl Per-process timers
-    vl Message queues
-    vl Message passing
-    vl Process descriptors
-    vl Extended file attributes
-    vl Error message management
-    vl Real time message queues
-    vl Capsicum
-    vl Feed-forward system clock
-    vl Auditing (BSM)
-    vl User groups
-    vl Multiplexed file I/O
-    vl Kernel modules
-    vl Jails
+    vl [color=LightPink] [File management]
+    vl [color=LightPink] [File I/O]
+    vl [color=LightPink] [Mountable filesystems]
+    vl [File access control (ACL)]
+    vl [color=LightPink] [File permissions]
+    vl [color=LightPink] [Process]
+    vl [Process tracing]
+    vl [IPC]
+    vl [Memory mapping]
+    vl [Shared memory]
+    vl [Semaphores]
+    vl [Scheduling control]
+    vl [Asynchronous I/O]
+    vl [Kernel events]
+    vl [KSE]
+    vl [Memory locking]
+    vl [File pointer I/O]
+    vl [Per-process timers]
+    vl [Message queues]
+    vl [Message passing]
+    vl [Process descriptors]
+    vl [Extended file attributes]
+    vl [Error message management]
+    vl [Real time message queues]
+    vl [Capsicum]
+    vl [Feed-forward system clock]
+    vl [Auditing (BSM)]
+    vl [User groups]
+    vl [Multiplexed file I/O]
+    vl [Kernel modules]
+    vl [Jails]
   }
   hbox {
     hl [Bootstrapping]
