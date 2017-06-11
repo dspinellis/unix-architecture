@@ -26,7 +26,9 @@ import argparse
 import re
 import sys
 
-RE_COLOR = re.compile(r'\[\s*color\s*=(\w+)\s*\]')
+RE_COLOR = re.compile(r'\[?\s*color\s*=(\w+)\s*[\],]')
+# Left and right adornment
+RE_ADORN_LR = re.compile(r'\[?\s*adornlr\s*=(\w+)\s*[\],]')
 RE_HOR_BOX = re.compile(r'\s*hbox\s*\{')
 RE_HOR_BOX_LABEL = re.compile(r'\s*hbox\s+([^{\s].*)')
 RE_VER_BOX = re.compile(r'\s*vbox\s*\{')
@@ -243,6 +245,15 @@ def process_box(file_name, file_input, box):
                 box.add_element(e)
     return box
 
+def process_style(line, style_re):
+    """Process the line for the specified style compiled regular expression,
+    returning the line and style (if any) values"""
+    matched = style_re.search(line)
+    if matched:
+        return (style_re.sub('', line), matched.group(1))
+    else:
+        return (line, '')
+
 def process_line(file_name, file_input, line, container):
     """Process a single element line return an element object, None if empty"""
     line = line.rstrip()
@@ -253,12 +264,14 @@ def process_line(file_name, file_input, line, container):
     if not line:
         return NewLine()
 
-    matched = RE_COLOR.search(line)
-    if matched:
-        color = matched.group(1)
-        line = RE_COLOR.sub('', line)
+    (line, color) = process_style(line, RE_COLOR)
+    (line, adorn_lr) = process_style(line, RE_ADORN_LR)
+
+    if adorn_lr:
+        adorn_left = '$\\' + adorn_lr + '$ '
+        adorn_right = ' $\\' + adorn_lr + '$'
     else:
-        color = ''
+        adorn_left = adorn_right = ''
 
     if RE_HOR_BOX.match(line):
         return process_box(file_name, file_input,
@@ -274,13 +287,15 @@ def process_line(file_name, file_input, line, container):
 
     matched = RE_HOR_LABEL.match(line)
     if matched:
-        return HorizontalLabel(container, matched.group(1), color)
+        return HorizontalLabel(container, adorn_left + matched.group(1) +
+                               adorn_right, color)
 
     # A box with a single horizontal label
     matched = RE_HOR_BOX_LABEL.match(line)
     if matched:
         box = HorizontalBox(container, color)
-        box.add_element(HorizontalLabel(box, matched.group(1), color))
+        box.add_element(HorizontalLabel(box, adorn_left + matched.group(1) +
+                                        adorn_right, color))
         return box
 
     matched = RE_VER_LABEL.match(line)
@@ -301,6 +316,7 @@ def prologue():
     print(r"""\documentclass{standalone}
 
 \usepackage{adjustbox}
+\usepackage{MnSymbol}
 \usepackage{array}
 \usepackage{graphicx}
 \usepackage{hhline}

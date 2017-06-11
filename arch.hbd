@@ -140,7 +140,7 @@ hbox {
   }
 
   hbox {
-    hl Libraries
+    hl [adornlr=upspoon] Libraries
     hbox {
       hl [C Standard]
       vl ctype
@@ -217,9 +217,9 @@ hbox {
 }
 
 hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
-  hl \bfseries{Kernel Space}
+  hl [adornlr=upspoon] \bfseries{Kernel Space}
   hbox {
-    hl System Call Interface
+    hl [adornlr=upspoon] System Call Interface
     vl [color=LightPink]File management
     vl [color=LightPink]File I/O
     vl [color=LightPink]Mountable filesystems
@@ -337,21 +337,21 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
   }
   pbox {
     hbox { # Based on McKusick and Neville-Neil. The Design and Implementation of the FreeBSD OS, Figure 6.1
-      hl [I/O Subsystem]
+      hl [adornlr=upspoon] [I/O Subsystem]
       hbox {
-	hl [Vnode, Object, active file entries, and VM Interfaces]
+	hl [adornlr=upspoon] [Vnode, Object, active file entries, and VM Interfaces]
 	pbox { # Special devices, named, and sockets
 	  hbox [color=LightSkyBlue] {
-	    hl Special Devices
+	    hl [adornlr=upspoon] Special Devices
 	    vl Line discipline
 	    vl tty
 	    vl Raw character
 	    vl Raw disk
 	  }
 	  pbox {
-	    hbox [VM]
+	    hbox [adornlr=upspoon] [VM]
 	    hbox { # See http://kos.enix.org/pub/vfssun.pdf#page=2
-	      hl Filesystem layers/types
+	      hl [adornlr=upspoon] Filesystem layers/types
 	      vl UFS
 	      vl FFS
 	      vl NFS
@@ -363,13 +363,13 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
 	      vl ...
 	    }
 
-	    hbox [Buffer/page cache]
+	    hbox [adornlr=upspoon] [Buffer/page cache]
 	  }
 	  pbox {
-	    hbox Socket
+	    hbox [adornlr=upspoon] Socket
 
 	    hbox {
-	      hl [Network Protocols]
+	      hl [adornlr=upspoon] [Network Protocols]
 	      vl TCP
 	      vl UDP
 	      vl ICMP 4/6
@@ -378,7 +378,7 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
 	    }
 
 	    hbox { # See http://www.netbsd.org/gallery/presentations/ast/2012_AsiaBSDCon/Tutorial_NETGRAPH.pdf#page=19
-	      hl NETGRAPH
+	      hl [adornlr=upspoon] NETGRAPH
 	      vl ng\_async
 	      vl ng\_atm
 	      vl ng\_bpf
@@ -390,9 +390,9 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
       }
 
       hbox {
-	hl Device Drivers and Abstractions
+	hl [adornlr=upspoon] Device Drivers and Abstractions
 	hbox {
-	  hl Character Devices
+	  hl [adornlr=upspoon] Character Devices
 	  vl [color=LightSkyBlue] Keyboard
 	  vl Mouse
 	  vl [color=LightSkyBlue] Printer
@@ -400,9 +400,9 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
 	  vl ...
 	}
 	hbox { # See http://www.win.tue.nl/~aeb/linux/lk/talks/lk-geom.pdf
-	  hl GEOM (disk I/O)
+	  hl [adornlr=upspoon] GEOM (disk I/O)
 	  hbox {
-	    hl Storage
+	    hl [adornlr=upspoon] Storage
 	    vl stripe
 	    vl mirror
 	    vl raid3
@@ -412,7 +412,7 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
 	  }
 
 	  hbox {
-	    hl Encryption/Compression
+	    hl [adornlr=upspoon] Encryption/Compression
 	    vl eli
 	    vl bde
 	    vl shsec
@@ -420,7 +420,7 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
 	  }
 
 	  hbox {
-	    hl Filesystem
+	    hl [adornlr=upspoon] Filesystem
 	    vl label
 	    vl journal
 	    vl cache
@@ -429,7 +429,7 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
 	  }
 
 	  hbox {
-	    hl Virtualization
+	    hl [adornlr=upspoon] Virtualization
 	    vl md
 	    vl nop
 	    vl fate
@@ -437,10 +437,10 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
 	    vl ...
 	  }
 
-	  hbox ...
+	  hbox [adornlr=upspoon] ...
 	}
 	hbox { # See https://people.freebsd.org/~mav/disk.pdf#page=19
-	  hl Common Access (CAM)
+	  hl [adornlr=upspoon] Common Access (CAM)
 	  vl ATA
 	  vl SATA
 	  vl SPI
@@ -448,28 +448,28 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
 	  vl ...
 	}
 	hbox {
-	  hl Network Interface Drivers
+	  hl [adornlr=upspoon] Network Interface Drivers
 	  hbox {
-	    hl [802.11 layer]
-	    hl [802.11 drivers]
+	    hl [adornlr=upspoon] [802.11 layer]
+	    hl [adornlr=upspoon] [802.11 drivers]
 	  }
 	  hbox {
-	    hl [Native drivers]
+	    hl [adornlr=upspoon] [Native drivers]
 	    vl if\_ae
 	    vl if\_age
 	    vl ... (100+)
 	    vl if\_xl
 	  }
 	  hbox {
-	    hl NDIS wrapper
-	    hl NDIS drivers
+	    hl [adornlr=upspoon] NDIS wrapper
+	    hl [adornlr=upspoon] NDIS drivers
 	  }
 	  }
 	}
       }
     }
     hbox {
-      hl [Process Control Subsystem]
+      hl [adornlr=upspoon] [Process Control Subsystem]
       vl [color=Khaki] [Scheduler]
       vl [color=Khaki] [Memory management]
       vl Inter-process [communication]
@@ -477,8 +477,8 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
       vl ...
     }
 
-    hbox \rule{45em}{0pt}[Bus Virtualizations]\rule{45em}{0pt}
+    hbox [adornlr=upspoon] \rule{51em}{0pt}[Bus Virtualizations]\rule{51em}{0pt}
 
-    hbox \rule{41em}{0pt}[Hardware and Architecture Abstractions]\rule{41em}{0pt}
+    hbox [adornlr=upspoon] \rule{46.5em}{0pt}[Hardware and Architecture Abstractions]\rule{46.5em}{0pt}
   }
 }
