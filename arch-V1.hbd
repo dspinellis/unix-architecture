@@ -167,18 +167,6 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
   }
   hbox [color=Khaki] Boot Loader
 
-  vbox {
-    hl [Kernel Utility Functions]
-    vl alloc
-    vl [color=Plum] free
-    vl [color=Plum] panic
-    vl [color=Plum] namei
-    vl sleep
-    vl [color=Plum] wakeup
-    vl mget
-    vl access
-    vl iget
-  }
   pbox {
     hbox {
       hl [adornlr=upspoon] [I/O Subsystem]
@@ -224,5 +212,17 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
     vl [Swap manager]
     vl [color=Khaki] [Memory manager]
     vl ...
+  }
+  vbox {
+    hl [adornlr=upspoon] [Kernel Utility Functions]
+    vl alloc
+    vl [color=Plum] free
+    vl [color=Plum] panic
+    vl [color=Plum] namei
+    vl sleep
+    vl [color=Plum] wakeup
+    vl mget
+    vl access
+    vl iget
   }
 }
