@@ -311,9 +311,13 @@ def process_file(args, file_name, file_input):
                       PlainBox(None, None, args.separate_boxes))
     print(box.to_string())
 
-def prologue():
+def prologue(args):
     """Begin a stand-alone LaTeX document"""
-    print(r"""\documentclass{standalone}
+    if args.prologue:
+        with open(args.prologue, 'r') as fin:
+            print(fin.read(), end='')
+    else:
+        print(r"""\documentclass{standalone}
 
 \usepackage{adjustbox}
 \usepackage{MnSymbol}
@@ -321,7 +325,8 @@ def prologue():
 \usepackage{graphicx}
 \usepackage{hhline}
 \usepackage[table,svgnames]{xcolor}
-
+""")
+    print(r"""
 \begin{document}
 
 \arrayrulewidth=1pt
@@ -340,12 +345,15 @@ def main():
                         help='Place vbox elements into separate boxes',
                         action='store_true')
 
+    parser.add_argument('-p', '--prologue',
+                        help='LaTeX prologue file', type=str)
+
     parser.add_argument('file',
                         help='File to process',
                         nargs='*', default='-',
                         type=str)
     args = parser.parse_args()
-    prologue()
+    prologue(args)
     for file_name in args.file:
         if file_name == '-':
             process_file(args, '<stdin>', sys.stdin)
