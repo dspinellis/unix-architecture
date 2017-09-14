@@ -26,6 +26,7 @@ import argparse
 import re
 import sys
 
+RE_EMPTY = re.compile(r'\s*(#.*)?$')
 RE_COLOR = re.compile(r'\[?\s*color\s*=(\w+)\s*[\],]')
 # Left and right adornment
 RE_ADORN_LR = re.compile(r'\[?\s*adornlr\s*=(\w+)\s*[\],]')
@@ -257,7 +258,7 @@ def process_style(line, style_re):
 def process_line(file_name, file_input, line, container):
     """Process a single element line return an element object, None if empty"""
     line = line.rstrip()
-    if line and line[0] == '#':
+    if line and RE_EMPTY.match(line):
         return None
     line = re.sub(r'#.*', '', line)
 
