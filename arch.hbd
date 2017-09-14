@@ -415,7 +415,7 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
     hbox {
       hl [Memory Management]
       vl ...
-      vl [color=Plum] malloc/free
+      vl malloc/free
       vl mbuf
       vl sbuf
       vl mbchain

@@ -216,7 +216,8 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
   vbox {
     hl [adornlr=upspoon] [Kernel Utility Functions]
     vl alloc
-    vl [color=Plum] free
+    # The following deal with disk blocks, not memory
+    vl alloc/free
     vl [color=Plum] panic
     vl [color=Plum] namei
     vl sleep
