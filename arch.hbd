@@ -324,7 +324,7 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
 	  vl ...
 	}
 	hbox { # See http://www.win.tue.nl/~aeb/linux/lk/talks/lk-geom.pdf
-	  hl [adornlr=upspoon] GEOM (disk I/O)
+	  hl [adornlr=upspoon] Disk I/O (GEOM)
 	  hbox {
 	    hl [adornlr=upspoon] Storage
 	    vl stripe
@@ -365,11 +365,31 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
 	}
 	hbox { # See https://people.freebsd.org/~mav/disk.pdf#page=19
 	  hl [adornlr=upspoon] Common Access (CAM)
-	  vl ATA
-	  vl SATA
-	  vl SPI
-	  vl SAS
-	  vl ...
+
+	  hbox {
+	    hl [adornlr=upspoon] Peripheral
+	    vl disk
+	    vl cdrom
+	    vl tape
+	    vl enclosure
+	    vl changer
+	    vl ...
+	  }
+
+	  hbox {
+	    hl [adornlr=upspoon] Transport (XPT)
+	  }
+
+	  hbox {
+	    hl [adornlr=upspoon] HBA
+	    vl SAS
+	    vl SPI
+	    vl 1394
+	    vl FC
+	    vl UMASS
+	    vl iSCSI
+	    vl ...
+	  }
 	}
 	hbox {
 	  hl [adornlr=upspoon] Network Interface Drivers
