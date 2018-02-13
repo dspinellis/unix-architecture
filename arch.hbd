@@ -263,7 +263,7 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
     hbox { # Based on McKusick and Neville-Neil. The Design and Implementation of the FreeBSD OS, Figure 6.1
       hl [adornlr=upspoon] [I/O Subsystem]
       hbox {
-	hl [adornlr=upspoon] [Vnode, Object, active file entries, and VM Interfaces]
+	hl [adornlr=upspoon] [Vnode, ZFS, Object, active file entries, and VM Interfaces]
 	pbox { # Special devices, named, and sockets
 	  hbox [color=LightSkyBlue] {
 	    hl [adornlr=upspoon] Special Devices
@@ -284,10 +284,18 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
 	      vl UDF
 	      vl devfs
 	      vl procfs
-	      vl ...
 	    }
 
 	    hbox [adornlr=upspoon] [Buffer/page cache]
+	  }
+	  hbox {
+	    hl [adornlr=upspoon] ZFS
+
+	    hbox [adornlr=upspoon] ZPL
+
+	    hbox [adornlr=upspoon] DMU
+
+	    hbox [adornlr=upspoon] SPA
 	  }
 	  pbox {
 	    hbox [adornlr=upspoon] Socket
