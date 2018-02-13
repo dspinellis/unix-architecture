@@ -275,15 +275,18 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
 	  pbox {
 	    hbox [adornlr=upspoon] [VM]
 	    hbox { # See http://kos.enix.org/pub/vfssun.pdf#page=2
-	      hl [adornlr=upspoon] Filesystem layers/types
-	      vl UFS
+	      hl [adornlr=upspoon] VNODE / VFS
 	      vl FFS
 	      vl NFS
 	      vl CD9660
 	      vl Ext2FS
+	      vl SMBFS
+	      vl FuseFS
+	      vl mfs
 	      vl UDF
 	      vl devfs
 	      vl procfs
+	      vl ...
 	    }
 
 	    hbox [adornlr=upspoon] [Buffer/page cache]
