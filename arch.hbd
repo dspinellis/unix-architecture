@@ -367,7 +367,7 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
 	    hl [adornlr=upspoon] Virtualization
 	    vl md
 	    vl nop
-	    vl fate
+	    vl gate
 	    vl virstor
 	    vl ...
 	  }
