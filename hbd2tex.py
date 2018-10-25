@@ -37,6 +37,7 @@ RE_PLAIN_BOX = re.compile(r'\s*pbox\s*\{')
 RE_BLOCK_END = re.compile(r'\s*\}')
 RE_HOR_LABEL = re.compile(r'\s*hl\s+(.*)')
 RE_VER_LABEL = re.compile(r'\s*vl\s+(.*)')
+RE_HOR_SPACE = re.compile(r'\s*hspace\s+(.*)')
 
 def cell_color(color):
     """Return the color of a cell given its container and the specified color"""
@@ -93,6 +94,25 @@ class HorizontalLabel(Contained):
     def to_string(self):
 	return (r'\multicolumn{' + str(self.container.ncol - 1) + '}{|c|}{' +
          cell_color(self.color) + self.label + "} \\\\\n")
+
+class HorizontalSpace(Contained):
+    """Spacing placed horizontally"""
+
+    def __init__(self, container, space):
+        self.space = space
+        self.container = container
+        super(HorizontalSpace, self).__init__(container)
+
+    def required_columns(self):
+        return 0
+
+    def end_line(self):
+        """String to terminate a table line consisting of this element"""
+        return ''
+
+    def to_string(self):
+	return (r'\multicolumn{' + str(self.container.ncol - 1) +
+         '}{c@{\\hspace{' + self.space + "}}}{} \\\\\n")
 
 class VerticalLabel(Contained):
     """A label placed vertically"""
@@ -290,6 +310,10 @@ def process_line(file_name, file_input, line, container):
     if matched:
         return HorizontalLabel(container, adorn_left + matched.group(1) +
                                adorn_right, color)
+
+    matched = RE_HOR_SPACE.match(line)
+    if matched:
+        return HorizontalSpace(container, matched.group(1))
 
     # A box with a single horizontal label
     matched = RE_HOR_BOX_LABEL.match(line)

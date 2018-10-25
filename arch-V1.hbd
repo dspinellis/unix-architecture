@@ -226,4 +226,31 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
     vl access
     vl iget
   }
+  pbox {
+    hspace 24.5em
+  }
+  hbox [color=lightgray] {
+    hl \large\bfseries{Legend}
+    hl \bfseries{A Major Component}
+    hbox {
+      hl A top-layer sub-component
+    }
+
+    hbox {
+      hl [adornlr=upspoon] A middle-layer sub-component
+      hl Lollipop marks layer intefacing
+      hl [color=SkyBlue] Color marks versions' similarities
+    }
+
+    hbox {
+      hl [adornlr=upspoon] [A low-layer sub-component]
+      hl [Square brackets mark own grouping]
+      vl Sub-sub-
+      vl -component 2
+      vl -component 3
+      vl -component 4
+      vl ...
+      vl -component N
+    }
+  }
 }
