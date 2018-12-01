@@ -350,6 +350,8 @@ def prologue(args):
 \usepackage{graphicx}
 \usepackage{hhline}
 \usepackage[table,svgnames]{xcolor}
+
+\definecolor{whitesmoke}{rgb}{0.96, 0.96, 0.96}
 """)
     print(r"""
 \begin{document}

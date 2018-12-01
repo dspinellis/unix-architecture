@@ -229,7 +229,7 @@ hbox { # Based on M. Bach. The Design of the Unix OS, Figure 2.1
   pbox {
     hspace 24.5em
   }
-  hbox [color=lightgray] {
+  hbox [color=whitesmoke] {
     hl \large\bfseries{Legend}
     hl \bfseries{A Major Component}
     hbox {
